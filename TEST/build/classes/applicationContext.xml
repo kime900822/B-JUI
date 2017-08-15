@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  
+    xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">  
+
+<!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName">
+		<value>com.microsoft.sqlserver.jdbc.SQLServerDriver</value>
+	</property>
+	<property name="url">
+		<value>jdbc:sqlserver://zzh624109553.xicp.net:26843;DatabaseName=test</value>
+	</property>
+	<property name="username">
+		<value>sa</value>
+	</property>
+	<property name="password">
+		<value>zzh900822</value>
+	</property>
+</bean>  -->
+
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName">
+		<value>com.mysql.jdbc.Driver</value>
+	</property>
+	<property name="url">
+		<value>jdbc:mysql://localhost/TEST?characterEncoding=gb2312</value>
+	</property>
+	<property name="username">
+		<value>kime</value>
+	</property>
+	<property name="password">
+		<value>zzh900822</value>
+	</property>
+</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+
+</beans>
