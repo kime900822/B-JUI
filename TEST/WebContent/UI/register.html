@@ -1,0 +1,32 @@
+<div class="bjui-pageContent">
+    <form action="../../json/ajaxDone.json" data-toggle="validate" method="post" data-close-current="true">
+        <div class="bjui-row col-1">
+            <label class="row-label">姓名:</label>
+            <div class="row-input required">
+                <input type="text" id="j_userinfo_name" name="name" value="" data-rule="required">
+            </div>
+            <label class="row-label">年龄:</label>
+            <div class="row-input">
+                <input type="text" id="j_userinfo_age" name="age" value="" >
+            </div>
+            <label class="row-label">性别:</label>
+            <div class="row-input">
+                <input type="text" id="j_userinfo_sex" name="sex" value="" >
+            </div>
+            <label class="row-label">密码:</label>
+            <div class="row-input required">
+                <input type="password" id="j_userinfo_pass" name="password" value="" data-rule="密码:required;length(6~)">
+            </div>
+            <label class="row-label">确认密码:</label>
+            <div class="row-input required">
+                <input type="password" id="j_userinfo_pass_confirmpass" name="" value="" data-rule="required;match(#j_userinfo_pass)">
+            </div>
+        </div>
+    </form>
+</div>
+<div class="bjui-pageFooter">
+    <ul>
+        <li><button type="button" class="btn-close" data-icon="close">关闭</button></li>
+        <li><button type="submit" class="btn-default" data-icon="check">注册</button></li>
+    </ul>
+</div>

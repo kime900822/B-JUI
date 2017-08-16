@@ -57,13 +57,6 @@ $(function() {
             $(this).find('.form-control').eq(i_index).focus();
             return false;
         }
-        var validationcode=$("#j_captcha").val();
-        alert(validationcode);
-        if(validationcode!=$.cookie("validationcode")){
-        	alert("验证码有误！");
-        	return false;
-        }
-        
         var $remember = $("#j_remember");
         if ($remember.attr('checked')) {
             $.cookie(COOKIE_NAME, $("#j_username").val(), { path: '/', expires: 15 });
@@ -87,15 +80,12 @@ $(function() {
     });
 });
 function changeCode(){
-	var img=document.getElementById("captcha_img");
-	img.src="/TEST/serlert/ValidationCode?"+Math.random();	
+    //$("#captcha_img").attr("src", "sys/login/getCaptcha?t="+ (new Date().getTime()));
 }
 function choose_bg() {
     var bg = Math.floor(Math.random() * 9 + 1);
     $('body').css('background-image', 'url(images/loginbg_0'+ bg +'.jpg)');
 }
-
-
 </script>
 </head>
 <body>
@@ -131,7 +121,7 @@ function choose_bg() {
                 <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon-password"><span class="glyphicon glyphicon-exclamation-sign"></span></span>
                     <input type="text" class="form-control" id="j_captcha" name="captcha" placeholder="验证码" aria-describedby="sizing-addon-password">
-                    <span class="input-group-addon code" id="basic-addon-code"><img id="captcha_img" src="/TEST/serlert/ValidationCode" alt="点击更换" title="点击更换" class="m" onclick="changeCode();" ></span>
+                    <span class="input-group-addon code" id="basic-addon-code"><img id="captcha_img" src="images/captcha.jpg" alt="点击更换" title="点击更换" class="m"></span>
                 </div>
             </div>
             <div class="form-group">

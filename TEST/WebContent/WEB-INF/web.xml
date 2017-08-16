@@ -30,13 +30,6 @@
     <param-value>classpath:applicationContext.xml</param-value>
 </context-param>
   
-<servlet>
-	<servlet-name>ValidationCode</servlet-name>
-	<servlet-class>com.kime.servlet.ValidationCode</servlet-class>
-</servlet> 
-<servlet-mapping>
-	<servlet-name>ValidationCode</servlet-name>
-	<url-pattern>/ValidationCode</url-pattern>
-</servlet-mapping>
+
   
 </web-app>

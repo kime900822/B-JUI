@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri='/struts-tags' prefix='s' %>
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,9 +10,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>B-JUI 系统登录</title>
 <meta name="renderer" content="webkit">
+<!-- bootstrap - css -->
+<link href="B-JUI/themes/css/bootstrap.css" rel="stylesheet">
+<!-- core - css -->
+<link href="B-JUI/themes/css/style.css" rel="stylesheet">
+<link href="B-JUI/themes/blue/core.css" id="bjui-link-theme" rel="stylesheet">
+<link href="B-JUI/themes/css/fontsize.css" id="bjui-link-theme" rel="stylesheet">
+<!-- plug - css -->
+<link href="B-JUI/plugins/kindeditor_4.1.11/themes/default/default.css" rel="stylesheet">
+<link href="B-JUI/plugins/colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+<link href="B-JUI/plugins/nice-validator-1.0.7/jquery.validator.css" rel="stylesheet">
+<link href="B-JUI/plugins/bootstrapSelect/bootstrap-select.css" rel="stylesheet">
+<link href="B-JUI/plugins/webuploader/webuploader.css" rel="stylesheet">
+<link href="B-JUI/themes/css/FA/css/font-awesome.min.css" rel="stylesheet">
+<!-- Favicons -->
+<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-precomposed.png">
+<link rel="shortcut icon" href="assets/ico/favicon.png">
+<!--[if lte IE 7]>
+<link href="B-JUI/themes/css/ie7.css" rel="stylesheet">
+<![endif]-->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lte IE 9]>
+    <script src="B-JUI/other/html5shiv.min.js"></script>
+    <script src="B-JUI/other/respond.min.js"></script>
+<![endif]-->
+<!-- jquery -->
 <script src="B-JUI/js/jquery-1.11.3.min.js"></script>
 <script src="B-JUI/js/jquery.cookie.js"></script>
-<link href="B-JUI/themes/css/bootstrap.min.css" rel="stylesheet">
+<!--[if lte IE 9]>
+<script src="B-JUI/other/jquery.iframe-transport.js"></script>
+<![endif]-->
+<!-- B-JUI -->
+<script src="B-JUI/js/bjui-all.min.js"></script>
+<!-- plugins -->
+<!-- swfupload for kindeditor -->
+<script src="B-JUI/plugins/swfupload/swfupload.js"></script>
+<!-- Webuploader -->
+<script src="B-JUI/plugins/webuploader/webuploader.js"></script>
+<!-- kindeditor -->
+<script src="B-JUI/plugins/kindeditor_4.1.11/kindeditor-all-min.js"></script>
+<script src="B-JUI/plugins/kindeditor_4.1.11/lang/zh-CN.js"></script>
+<!-- colorpicker -->
+<script src="B-JUI/plugins/colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- ztree -->
+<script src="B-JUI/plugins/ztree/jquery.ztree.all-3.5.js"></script>
+<!-- nice validate -->
+<script src="B-JUI/plugins/nice-validator-1.0.7/jquery.validator.js"></script>
+<script src="B-JUI/plugins/nice-validator-1.0.7/jquery.validator.themes.js"></script>
+<!-- bootstrap plugins -->
+<script src="B-JUI/plugins/bootstrap.min.js"></script>
+<script src="B-JUI/plugins/bootstrapSelect/bootstrap-select.min.js"></script>
+<script src="B-JUI/plugins/bootstrapSelect/defaults-zh_CN.min.js"></script>
+<!-- icheck -->
+<script src="B-JUI/plugins/icheck/icheck.min.js"></script>
+<!-- HighCharts -->
+<script src="B-JUI/plugins/highcharts/highcharts.js"></script>
+<script src="B-JUI/plugins/highcharts/highcharts-3d.js"></script>
+<script src="B-JUI/plugins/highcharts/themes/gray.js"></script>
+<!-- other plugins -->
+<script src="B-JUI/plugins/other/jquery.autosize.js"></script>
+<link href="B-JUI/plugins/uploadify/css/uploadify.css" rel="stylesheet">
+<script src="B-JUI/plugins/uploadify/scripts/jquery.uploadify.min.js"></script>
+<script src="B-JUI/plugins/download/jquery.fileDownload.js"></script>
+
 <style type="text/css">
 html, body { height: 100%; overflow: hidden; }
 body {
@@ -111,7 +173,7 @@ function choose_bg() {
 <![endif]-->
 <div class="container">
     <div class="main_box">
-        <form action="index.html" id="login_form" method="post">
+        <form action="index.html" id="login_form" method="post" data-toggle="validate">
             <input type="hidden" value="" id="j_randomKey" />
             <input type="hidden" name="jfinal_token" value="" />
             <p class="text-center logo"><img src="images/logo.png" height="45"></p>
@@ -119,21 +181,20 @@ function choose_bg() {
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon-user"><span class="glyphicon glyphicon-user"></span></span>
-                    <input type="text" class="form-control" id="j_username" name="username" value="" placeholder="登录账号" aria-describedby="sizing-addon-user">
+                    <input type="text" class="form-control" id="j_username" name="username" value="" data-rule="required" placeholder="登录账号" aria-describedby="sizing-addon-user">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon-password"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" class="form-control" id="j_password" name="passwordhash" placeholder="登录密码" aria-describedby="sizing-addon-password">
+                    <input type="password" class="form-control" id="j_password" name="passwordhash" data-rule="required" placeholder="登录密码" aria-describedby="sizing-addon-password">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon-password"><span class="glyphicon glyphicon-exclamation-sign"></span></span>
-                    <input type="text" class="form-control" id="j_captcha" name="captcha" placeholder="验证码" aria-describedby="sizing-addon-password">
+                    <input type="text" class="form-control" id="j_captcha" data-rule="required" name="captcha" placeholder="验证码" aria-describedby="sizing-addon-password">
                     <span class="input-group-addon code" id="basic-addon-code"><img id="captcha_img" alt="点击更换" title="点击更换" class="m" ></span>
-                	<a>${validationcode}</a>
                 </div>
             </div>
             <div class="form-group">
@@ -142,15 +203,18 @@ function choose_bg() {
                 </div>
             </div>
             <div class="text-center">
-                <button type="submit" id="login_ok" class="btn btn-primary btn-lg">&nbsp;登&nbsp;录&nbsp;</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="reset" class="btn btn-default btn-lg">&nbsp;重&nbsp;置&nbsp;</button>
+                <button type="submit" id="login_ok" class="btn btn-primary btn-lg">&nbsp;登&nbsp;录&nbsp;</button>&nbsp;             
+                <button type="reset" class="btn btn-default btn-lg">&nbsp;重&nbsp;置&nbsp;</button>&nbsp; 
+                 <a href="register.html" data-toggle="dialog" data-id="sys_user_changepass" data-mask="true" data-width="300" data-height="380">注册</a>                       	
             </div>
             <div class="text-center">
                 <hr>
-                2014 - 2016 <a href="login.html">B-JUI 前端管理框架</a>
+                2014 - 2016 <a href="login.jsp">B-JUI 前端管理框架</a>
             </div>
         </form>
     </div>
+    
+    
 </div>
 </body>
 </html>
