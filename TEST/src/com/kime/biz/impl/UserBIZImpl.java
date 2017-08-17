@@ -1,17 +1,25 @@
-package com.kime.dao.impl;
+package com.kime.biz.impl;
 
 import java.util.List;
 
-import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
-
+import com.kime.biz.UserBIZ;
 import com.kime.dao.UserDAO;
 import com.kime.model.User;
 
-public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
+public class UserBIZImpl implements UserBIZ {
+	UserDAO userDao;
+	
+	public UserDAO getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDAO userDao) {
+		this.userDao = userDao;
+	}
 
 	@Override
 	public int login(String name, String passWord) {
-		return this.getHibernateTemplate().find(" SELECT * from User where name=? and password=?", new String[]{name,passWord}).size();
+		return userDao.login(name, passWord);
 	}
 
 	@Override

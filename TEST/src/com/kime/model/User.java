@@ -1,59 +1,64 @@
 package com.kime.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * 用户类
  * @author zhaozhouhao
  *
  */
-@Entity(name="T_USER")
+@Entity(name="t_user")
+@Table(name="t_user")
 public class User {
-	@Id
-	private String uid;
-	@Basic
-	private String name;
-	@Basic
-	private String password;
-	@Basic
-	private int age;
-	@Basic
-	private String sex;
-	@Basic
-	private String type;
 	
+	private String uid;
+	
+	private String name;
+	
+	private String password;
+
+	private int age;
+	
+	private String sex;
+	
+	private String type;
+	@Id
 	public String getUid() {
 		return uid;
 	}
+
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
+	@Basic
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Basic
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	@Basic
 	public int getAge() {
 		return age;
 	}
 	public void setAge(int age) {
 		this.age = age;
 	}
+	@Basic
 	public String getSex() {
 		return sex;
 	}
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+	@Basic
 	public String getType() {
 		return type;
 	}

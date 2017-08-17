@@ -5,12 +5,15 @@
     xmlns:p="http://www.springframework.org/schema/p"  
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
     xsi:schemaLocation="http://www.springframework.org/schema/beans 
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd
            http://www.springframework.org/schema/aop 
-           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">  
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">  
 
 <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	<property name="driverClassName">
@@ -42,24 +45,53 @@
 	</property>
 </bean>
 
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource">
-			<ref bean="dataSource" />
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">
-					org.hibernate.dialect.MySQLDialect
-				</prop>
-			</props>
-		</property>
-		<property name="mappingResources">
-			<list>
+<bean id="sessionFactory"
+	class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+	<property name="dataSource">
+		<ref bean="dataSource" />
+	</property>
+	<property name="hibernateProperties">
+		<props>
+			<prop key="hibernate.dialect">
+				org.hibernate.dialect.MySQLDialect
+			</prop>
+		</props>
+	</property>
+</bean>
 
-			</list>
-		</property>
-	</bean>
+
+<bean id="transactionManager"
+        class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+</bean>
+<!-- 声明式事物，通过注解 -->
+<tx:annotation-driven transaction-manager="txManager"/>
+
+<bean id="transactionBase"  
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"  
+        lazy-init="true" abstract="true">  
+    <!-- 配置事务管理器 -->  
+    <property name="transactionManager" ref="transactionManager" />  
+    <!-- 配置事务属性 -->  
+    <property name="transactionAttributes">  
+        <props>  
+            <prop key="*">PROPAGATION_REQUIRED</prop>  
+        </props>  
+    </property>  
+</bean> 
+
+<!-- 配置DAO -->
+<bean id="UserDaoTarget" class="com.kime.dao.impl.UserDAOImpl">
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+    
+<bean id="UserDAO" parent="transactionBase" >  
+	<property name="target" ref="UserDaoTarget" />   
+</bean>
+
+<bean id="UserBIZ" class="com.kime.biz.impl.UserBIZImpl">
+	<property name="userDao">UserDAO</property>
+</bean>
 
 
 </beans>
