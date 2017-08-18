@@ -126,7 +126,7 @@ $(function() {
         }
         var validatiion=$("#j_captcha").val();
         if(validatiion!=$.cookie('validationcode')){
-        	alert("验证码有误！");
+        	BJUI.alertmsg('error', '验证码错误！');
         	return false;
         }
         
@@ -152,6 +152,49 @@ $(function() {
         
     });
 });
+
+function checkform(){
+    var issubmit = true;
+    var i_index  = 0;
+    $(this).find('.form-control').each(function(i){
+        if ($.trim($(this).val()).length == 0) {
+            $(this).css('border', '1px #ff0000 solid');
+            issubmit = false;
+            if (i_index == 0)
+                i_index  = i;
+        }
+    });
+    if (!issubmit) {
+        $(this).find('.form-control').eq(i_index).focus();
+        return false;
+    }
+    var validatiion=$("#j_captcha").val();
+    if(validatiion!=$.cookie('validationcode')){
+    	BJUI.alertmsg('error', '验证码错误！');
+    	return false;
+    }
+    
+    var $remember = $("#j_remember");
+    if ($remember.attr('checked')) {
+        $.cookie(COOKIE_NAME, $("#j_username").val(), { path: '/', expires: 15 });
+    } else {
+        $.cookie(COOKIE_NAME, null, { path: '/' });  //删除cookie
+    }
+    
+    $("#login_ok").attr("disabled", true).val('登陆中..');
+    /*
+    var key = CryptoJS.enc.Base64.parse($("#j_randomKey").val());
+    var iv = CryptoJS.enc.Latin1.parse('0102030405060708');
+    var password = CryptoJS.AES.encrypt($("#j_password").val(), key, {iv:iv, mode:CryptoJS.mode.CBC, padding:CryptoJS.pad.Pkcs7 });
+    
+    $("#j_password").val(password)
+    */
+    
+    return true;
+    
+    //location.href = 'index.jsp'
+	
+}
 function changeCode(){
 	var img=document.getElementById("captcha_img");
 	img.src="/TEST/ValidationCode?"+Math.random();	
@@ -176,7 +219,7 @@ function choose_bg() {
 <![endif]-->
 <div class="container">
     <div class="main_box">
-        <form action="login.action" id="login_form" method="post" data-toggle="validate">
+        <form action="login.action" id="login_form" method="post" data-toggle="validate" onsubmit="return checkform();">
             <input type="hidden" value="" id="j_randomKey" />
             <input type="hidden" name="jfinal_token" value="" />
             <p class="text-center logo"><img src="images/logo.png" height="45"></p>
