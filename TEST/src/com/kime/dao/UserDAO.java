@@ -12,21 +12,21 @@ public interface UserDAO {
 	 * @param passWord
 	 * @return
 	 */
-	public int login(String name,String passWord);
+	public User login(String name,String passWord);
 	
 	/**
 	 * 注册
 	 * @param user
 	 * @return
 	 */
-	public int register(User user);
+	public void register(User user);
 	
 	/**
 	 * 查询
 	 * @param where
 	 * @return
 	 */
-	public List<User> getUser(String where);
+	public List getUser(String where);
 	
 	/**
 	 * 修改

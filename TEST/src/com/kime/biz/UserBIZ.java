@@ -11,14 +11,14 @@ public interface UserBIZ {
 	 * @param passWord
 	 * @return
 	 */
-	public int login(String name,String passWord);
+	public User login(String name,String passWord);
 	
 	/**
 	 * 注册
 	 * @param user
 	 * @return
 	 */
-	public int register(User user);
+	public void register(User user);
 	
 	/**
 	 * 查询

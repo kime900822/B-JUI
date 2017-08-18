@@ -10,20 +10,26 @@ import com.kime.model.User;
 public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
 	@Override
-	public int login(String name, String passWord) {
-		return this.getHibernateTemplate().find(" SELECT * from User where name=? and password=?", new String[]{name,passWord}).size();
+	public User login(String name, String passWord) {
+		List user=this.getHibernateTemplate().find("FROM User where name=? and password=? ", new String[]{name,passWord});
+		if (user.size()>0) {
+			return (User)user.get(0);
+		}
+		else{
+			return null;
+		}
 	}
 
 	@Override
-	public int register(User user) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void register(User user) {
+		this.getHibernateTemplate().save(user);
+
 	}
 
 	@Override
-	public List<User> getUser(String where) {
+	public List getUser(String where) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.getHibernateTemplate().find("FROM User ?", new String[]{where});
 	}
 
 	@Override

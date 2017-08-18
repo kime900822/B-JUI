@@ -94,6 +94,9 @@ body {
 <script type="text/javascript">
 var COOKIE_NAME = 'sys_em_username';
 $(function() {
+	if('${login_message}'!=''){
+		BJUI.alertmsg('error', '${login_message}');
+	}
     choose_bg();
     changeCode();
     if ($.cookie(COOKIE_NAME)){
@@ -143,9 +146,9 @@ $(function() {
         $("#j_password").val(password)
         */
         
-        //return true;
+        return true;
         
-        location.href = 'index.jsp'
+        //location.href = 'index.jsp'
         
     });
 });
@@ -173,7 +176,7 @@ function choose_bg() {
 <![endif]-->
 <div class="container">
     <div class="main_box">
-        <form action="index.html" id="login_form" method="post" data-toggle="validate">
+        <form action="login.action" id="login_form" method="post" data-toggle="validate">
             <input type="hidden" value="" id="j_randomKey" />
             <input type="hidden" name="jfinal_token" value="" />
             <p class="text-center logo"><img src="images/logo.png" height="45"></p>
@@ -181,13 +184,13 @@ function choose_bg() {
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon-user"><span class="glyphicon glyphicon-user"></span></span>
-                    <input type="text" class="form-control" id="j_username" name="username" value="" data-rule="required" placeholder="登录账号" aria-describedby="sizing-addon-user">
+                    <input type="text" class="form-control" id="j_username" name="name" value="" data-rule="required" placeholder="登录账号" aria-describedby="sizing-addon-user">
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon-password"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" class="form-control" id="j_password" name="passwordhash" data-rule="required" placeholder="登录密码" aria-describedby="sizing-addon-password">
+                    <input type="password" class="form-control" id="j_password" name="password" data-rule="required" placeholder="登录密码" aria-describedby="sizing-addon-password">
                 </div>
             </div>
             <div class="form-group">

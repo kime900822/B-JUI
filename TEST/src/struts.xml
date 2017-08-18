@@ -24,8 +24,17 @@
 	<constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
 	
 	<package name="Struts 2" extends="struts-default">
-
-		
+		<action name="login" method="Login" class="UserAction">
+			<result name="success" >/UI/index.jsp</result>
+			<result name="error">/UI/login.jsp</result>
+		</action>
+	</package>
+	<package name="Struts-json" extends="json-default">
+		<action name="register" method="Register" class="UserAction">
+			<result type="json">
+				<param name="includeProperties">statusCode,message</param>
+			</result>
+		</action>
 	</package>
 </struts>
 

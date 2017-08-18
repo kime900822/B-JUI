@@ -18,14 +18,13 @@ public class UserBIZImpl implements UserBIZ {
 	}
 
 	@Override
-	public int login(String name, String passWord) {
+	public User login(String name, String passWord) {
 		return userDao.login(name, passWord);
 	}
 
 	@Override
-	public int register(User user) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void register(User user) {
+		userDao.register(user);
 	}
 
 	@Override

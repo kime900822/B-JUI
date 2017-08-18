@@ -83,6 +83,7 @@ $(function() {
         statusCode   : {ok:200, error:300, timeout:301}, //[可选]
         ajaxTimeout  : 300000, //[可选]全局Ajax请求超时时间(毫秒)
         alertTimeout : 3000,  //[可选]信息提示[info/correct]自动关闭延时(毫秒)
+        alertMsg: {displayPosition:'middlecenter', alertTimeout: 6000},
         pageInfo     : {total:'totalRow', pageCurrent:'pageCurrent', pageSize:'pageSize', orderField:'orderField', orderDirection:'orderDirection'}, //[可选]分页参数
         keys         : {statusCode:'statusCode', message:'message'}, //[可选]
         ui           : {
@@ -158,8 +159,8 @@ function bjui_index_exchange() {
             <nav class="collapse navbar-collapse" id="bjui-top-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="datetime"><a><span id="bjui-date">0000/00/00</span> <span id="bjui-clock">00:00:00</span></a></li>
-                    <li><a href="#">账号：BJUI</a></li>
-                    <li><a href="#">角色：管理员</a></li>
+                    <li><a href="#">账号：${user.name}</a></li>
+                    <li><a href="#">角色：${user.type}</a></li>
                     <li><a href="changepassword.html" data-toggle="dialog" data-id="sys_user_changepass" data-mask="true" data-width="400" data-height="300">修改密码</a></li>
                     <li><a href="login.jsp" style="font-weight:bold;">&nbsp;<i class="fa fa-power-off"></i> 注销登陆</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle bjui-fonts-tit" data-toggle="dropdown" title="更改字号"><i class="fa fa-font"></i> 大</a>
