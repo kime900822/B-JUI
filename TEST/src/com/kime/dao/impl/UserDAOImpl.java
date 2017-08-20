@@ -32,5 +32,11 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return this.getHibernateTemplate().find("FROM User ?", new String[]{where});
 	}
 
+	@Override
+	public void change(User user) {
+		this.getHibernateTemplate().update(user);
+		
+	}
+
 
 }

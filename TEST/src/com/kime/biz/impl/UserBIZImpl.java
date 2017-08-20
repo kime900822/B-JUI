@@ -35,7 +35,7 @@ public class UserBIZImpl implements UserBIZ {
 
 	@Override
 	public void change(User user) {
-		userDao.save(user);
+		userDao.change(user);
 	}
 
 }
