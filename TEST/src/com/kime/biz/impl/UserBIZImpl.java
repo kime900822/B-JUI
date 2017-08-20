@@ -24,7 +24,7 @@ public class UserBIZImpl implements UserBIZ {
 
 	@Override
 	public void register(User user) {
-		userDao.register(user);
+		userDao.save(user);
 	}
 
 	@Override
@@ -34,9 +34,8 @@ public class UserBIZImpl implements UserBIZ {
 	}
 
 	@Override
-	public int change(User user) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void change(User user) {
+		userDao.save(user);
 	}
 
 }

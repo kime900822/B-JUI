@@ -19,7 +19,7 @@ public interface UserDAO {
 	 * @param user
 	 * @return
 	 */
-	public void register(User user);
+	public void save(User user);
 	
 	/**
 	 * 查询
@@ -28,11 +28,5 @@ public interface UserDAO {
 	 */
 	public List getUser(String where);
 	
-	/**
-	 * 修改
-	 * @param user
-	 * @return
-	 */
-	public int change(User user);
 	
 }

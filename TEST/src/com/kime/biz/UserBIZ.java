@@ -32,5 +32,5 @@ public interface UserBIZ {
 	 * @param user
 	 * @return
 	 */
-	public int change(User user);
+	public void change(User user);
 }

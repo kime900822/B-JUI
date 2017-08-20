@@ -1,7 +1,5 @@
 package com.kime.model;
 
-import javax.persistence.*;
-
 /**
  * 用户类
  * @author zhaozhouhao
@@ -10,7 +8,7 @@ import javax.persistence.*;
 
 public class User {
 
-	private String uid;
+	private String id;
 
 	private String name;
 
@@ -22,14 +20,14 @@ public class User {
 
 	private String type;
 	
-	public String getUid() {
-		return uid;
-	}
 
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
 
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

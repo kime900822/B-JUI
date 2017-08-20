@@ -35,6 +35,11 @@
 				<param name="includeProperties">statusCode,message</param>
 			</result>
 		</action>
+		<action name="change" method="Change" class="UserAction">
+			<result type="json">
+				<param name="includeProperties">statusCode,message</param>
+			</result>
+		</action>
 	</package>
 </struts>
 

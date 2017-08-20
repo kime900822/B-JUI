@@ -21,7 +21,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public void register(User user) {
+	public void save(User user) {
 		this.getHibernateTemplate().save(user);
 
 	}
@@ -32,10 +32,5 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return this.getHibernateTemplate().find("FROM User ?", new String[]{where});
 	}
 
-	@Override
-	public int change(User user) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

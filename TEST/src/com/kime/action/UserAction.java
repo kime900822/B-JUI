@@ -1,5 +1,7 @@
 package com.kime.action;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +9,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.kime.biz.UserBIZ;
 import com.kime.model.User;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UserAction extends ActionSupport {
@@ -165,5 +168,22 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String Change(){
+		ActionContext actionContext = ActionContext.getContext();  
+        Map session = actionContext.getSession();  
+		user=(User)session.get("user");
+		user.setPassword(password);
+		
+		try {
+			userBIZ.change(user);
+			message="修改成功";
+			statusCode="200";	
+		} catch (Exception e1) {
+			message=e1.getMessage();
+			statusCode="300";	
+			e1.printStackTrace();
+		}
+		return SUCCESS;
+	}
 
 }
