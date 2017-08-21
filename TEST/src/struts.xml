@@ -28,6 +28,9 @@
 			<result name="success" >/UI/index.jsp</result>
 			<result name="error">/UI/login.jsp</result>
 		</action>
+		<action name="logout" method="Logout" class="UserAction">
+			<result name="success" >/UI/login.jsp</result>
+		</action>
 	</package>
 	<package name="Struts-json" extends="json-default">
 		<action name="register" method="Register" class="UserAction">

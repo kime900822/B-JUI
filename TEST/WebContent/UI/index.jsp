@@ -94,6 +94,12 @@ $(function() {
         debug        : true,    // [可选]调试模式 [true|false，默认false]
         theme        : 'green' // 若有Cookie['bjui_theme'],优先选择Cookie['bjui_theme']。皮肤[五种皮肤:default, orange, purple, blue, red, green]
     })
+    
+    if('${user.name}'==''){
+    	BJUI.alertmsg('error', '请重新登陆！');
+    	location.href = 'login.jsp'
+    }
+    
     //时钟
     var today = new Date(), time = today.getTime()
     $('#bjui-date').html(today.formatDate('yyyy/MM/dd'))
@@ -103,9 +109,7 @@ $(function() {
     }, 1000)
 })
 
-/*window.onbeforeunload = function(){
-    return "确定要关闭本系统 ?";
-}*/
+
 
 //菜单-事件-zTree
 function MainMenuClick(event, treeId, treeNode) {
@@ -162,7 +166,7 @@ function bjui_index_exchange() {
                     <li><a href="#">账号：${user.name}</a></li>
                     <li><a href="#">角色：${user.type}</a></li>
                     <li><a href="changepassword.jsp" data-toggle="dialog" data-id="sys_user_changepass" data-mask="true" data-width="400" data-height="300">修改密码</a></li>
-                    <li><a href="login.jsp" style="font-weight:bold;">&nbsp;<i class="fa fa-power-off"></i> 注销登陆</a></li>
+                    <li><a href="logout.action" style="font-weight:bold;">&nbsp;<i class="fa fa-power-off"></i> 注销登陆</a></li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle bjui-fonts-tit" data-toggle="dropdown" title="更改字号"><i class="fa fa-font"></i> 大</a>
                         <ul class="dropdown-menu" role="menu" id="bjui-fonts">
                             <li><a href="javascript:;" class="bjui-font-a" data-toggle="fonts"><i class="fa fa-font"></i> 特大</a></li>

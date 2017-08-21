@@ -9,6 +9,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.kime.biz.UserBIZ;
 import com.kime.model.User;
+import com.mysql.jdbc.ResultSetInternalMethods;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -184,6 +185,18 @@ public class UserAction extends ActionSupport {
 			e1.printStackTrace();
 		}
 		return SUCCESS;
+	}
+	
+	
+	public String Logout(){
+		
+		ActionContext actionContext = ActionContext.getContext();  
+        Map session = actionContext.getSession();  
+        session.clear();
+        name="";
+        password="";
+        return SUCCESS;
+		
 	}
 
 }
