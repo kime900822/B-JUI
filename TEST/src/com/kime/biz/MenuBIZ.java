@@ -15,7 +15,7 @@ public interface MenuBIZ {
 	
 	public List geiChildMenu();
 	
-	public void deleteMenu();
+	public void deleteMenu(Menu menu);
 	
 	
 }

@@ -50,9 +50,8 @@ public class MenuBIZImpl implements MenuBIZ {
 	}
 
 	@Override
-	public void deleteMenu() {
-		// TODO Auto-generated method stub
-		
+	public void deleteMenu(Menu menu) {
+		menuDao.deleteMenu(menu);		
 	}
 
 }

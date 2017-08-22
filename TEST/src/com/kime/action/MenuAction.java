@@ -105,9 +105,18 @@ public class MenuAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public String deleteMenu(){
-		
-		
+	public String deleteMenu() throws UnsupportedEncodingException{
+		lmenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
+		menu=(Menu) lmenu.get(0);
+		try {
+			menuBIZ.deleteMenu(menu);
+			result.setMessage("删除成功！");
+			result.setStatusCode("200");
+		} catch (Exception e) {
+			result.setMessage(e.getMessage());
+			result.setStatusCode("300");		
+		}
+		reslutJson=new ByteArrayInputStream(new Gson().toJson(result).getBytes("UTF-8")); 
 		return SUCCESS;
 	}
 	
@@ -116,8 +125,6 @@ public class MenuAction extends ActionSupport {
 		
 		lmenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
 		menu=(Menu) lmenu.get(0);
-		
-		check();
 		
 		try {
 			menuBIZ.editMenu(menu);
@@ -131,15 +138,4 @@ public class MenuAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public void check(){
-		if (menu.getLevel()==null) {
-			menu.setLevel("0");
-		}
-		if (menu.getOrder()==null) {
-			menu.setOrder("0");
-		}
-		if (menu.getParentid()==null) {
-			menu.setParentid("");
-		}
-	}
 }

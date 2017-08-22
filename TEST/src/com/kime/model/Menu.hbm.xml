@@ -11,7 +11,9 @@
 		<property name="name"></property>
 		<property name="target"></property>
 		<property name="url"></property>
-		<property name="order"></property>
+		<property name="order">
+			<column name="[order]"></column>
+		</property>
 		<property name="level"></property>
 	</class>
 </hibernate-mapping>

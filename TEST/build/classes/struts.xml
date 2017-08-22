@@ -53,6 +53,11 @@
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
+		<action name="deleteMenu" method="deleteMenu" class="MenuAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>
 	</package>
 </struts>
 

@@ -39,8 +39,17 @@ public class MenuDAOImpl extends HibernateDaoSupport implements MenuDAO {
 
 	@Override
 	public void modMenu(Menu menu) {
-		// TODO Auto-generated method stub
+		this.getHibernateTemplate().update(menu);
 		
 	}
 
+
+	@Override
+	public void deleteMenu(Menu menu) {
+		this.getHibernateTemplate().delete(menu);
+		
+	}
+
+	
+	
 }
