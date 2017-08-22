@@ -11,6 +11,9 @@
         {"id":"base-spinner", "name":"Spinner", "target":"navtab", "url":"html/form/spinner.html"}
     ]},
     {"name":"综合应用", "children":[
-        {"id":"base-demo-form", "name":"表单示例", "target":"navtab", "url":"html/form/form.html"}
+        {"id":"base-demo-form", "name":"表单示例", "target":"navtab", "url":"html/form/form.html"},
+        {"name":"test","children":[
+        	{"id":"test01","name":"测试1", "target":"navtab", "url":"JSP/menu/menu.html"}
+        ]}
     ]}
 ]

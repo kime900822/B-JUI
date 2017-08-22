@@ -35,7 +35,8 @@
 		<value>com.mysql.jdbc.Driver</value>
 	</property>
 	<property name="url">
-		<value>jdbc:mysql://zzh624109553.xicp.net:32215/b_jui</value>
+		<!-- <value>jdbc:mysql://zzh624109553.xicp.net:32215/b_jui</value> -->
+		<value>jdbc:mysql://localhost:3306/b_jui</value>
 	</property>
 	<property name="username">
 		<value>kime</value>
@@ -59,6 +60,7 @@
 	 <property name="mappingResources">
 	 	<list>
 	 		<value>com/kime/model/User.hbm.xml</value>
+	 		<value>com/kime/model/Menu.hbm.xml</value>
 	 	</list>
 	 </property>
 </bean>
@@ -93,19 +95,40 @@
 	<property name="target" ref="UserDaoTarget" />   
 </bean>
 
+<bean id="MenuDaoTarget" class="com.kime.dao.impl.MenuDAOImpl">
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+    
+<bean id="MenuDAO" parent="transactionBase" >  
+	<property name="target" ref="MenuDaoTarget" />   
+</bean>
+
+
 <!-- 配置BIZ -->
 <bean id="UserBIZ" class="com.kime.biz.impl.UserBIZImpl">
 	<property name="userDao" ref="UserDAO" />
+</bean>
+<bean id="MenuBIZ" class="com.kime.biz.impl.MenuBIZImpl">
+	<property name="menuDao" ref="MenuDAO" />
 </bean>
 
 <!-- 配置model -->
 <bean id="Result" class="com.kime.model.Result"></bean>
 <bean id="User" class="com.kime.model.User"></bean>
+<bean id="Menu" class="com.kime.model.Menu"></bean>
 
 <!-- 配置Action -->
 <bean id="UserAction" class="com.kime.action.UserAction">
 	<property name="userBIZ" ref="UserBIZ"/>
 	<property name="user" ref="User"/>
+	<property name="result" ref="Result"/>
 </bean>
+
+<bean id="MenuAction" class="com.kime.action.MenuAction">
+	<property name="menuBIZ" ref="MenuBIZ"/>
+	<property name="menu" ref="Menu"/>
+	<property name="result" ref="Result"/>
+</bean>
+
 
 </beans>

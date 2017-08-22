@@ -2,9 +2,11 @@ package com.kime.biz;
 
 import java.util.List;
 
+import com.kime.dao.UserDAO;
 import com.kime.model.User;
 
 public interface UserBIZ {
+	
 	/**
 	 * 登录
 	 * @param name
@@ -32,5 +34,7 @@ public interface UserBIZ {
 	 * @param user
 	 * @return
 	 */
-	public void change(User user);
+	public void modUser(User user);
+	
+	public void deleteUser(User user);
 }

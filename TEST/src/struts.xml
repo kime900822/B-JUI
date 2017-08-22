@@ -25,22 +25,32 @@
 	
 	<package name="Struts 2" extends="struts-default">
 		<action name="login" method="Login" class="UserAction">
-			<result name="success" >/UI/index.jsp</result>
-			<result name="error">/UI/login.jsp</result>
+			<result name="success" type="redirect">/UI/index.jsp</result>
+			<result name="error" type="redirect">/UI/login.jsp</result>
 		</action>
 		<action name="logout" method="Logout" class="UserAction">
-			<result name="success" >/UI/login.jsp</result>
+			<result name="success" type="redirect">/UI/login.jsp</result>
 		</action>
 	</package>
 	<package name="Struts-json" extends="json-default">
 		<action name="register" method="Register" class="UserAction">
-			<result type="json">
-				<param name="includeProperties">statusCode,message</param>
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
 		<action name="change" method="Change" class="UserAction">
-			<result type="json">
-				<param name="includeProperties">statusCode,message</param>
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>
+		<action name="getAllMenu" method="getAllMenu" class="MenuAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>
+		<action name="editMenu" method="editMenu" class="MenuAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
 	</package>

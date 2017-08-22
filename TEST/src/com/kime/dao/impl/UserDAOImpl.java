@@ -33,8 +33,14 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public void change(User user) {
+	public void modUser(User user) {
 		this.getHibernateTemplate().update(user);
+		
+	}
+
+	@Override
+	public void deleteUser(User user) {
+		this.getHibernateTemplate().delete(user);
 		
 	}
 

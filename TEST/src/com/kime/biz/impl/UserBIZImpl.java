@@ -34,8 +34,15 @@ public class UserBIZImpl implements UserBIZ {
 	}
 
 	@Override
-	public void change(User user) {
-		userDao.change(user);
+	public void modUser(User user) {
+		userDao.modUser(user);
 	}
 
+	@Override
+	public void deleteUser(User user) {
+		userDao.deleteUser(user);
+		
+	}
+
+	
 }

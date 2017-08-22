@@ -28,6 +28,8 @@ public interface UserDAO {
 	 */
 	public List getUser(String where);
 	
-	public void change(User user);
+	public void modUser(User user);
+	
+	public void deleteUser(User user);
 	
 }

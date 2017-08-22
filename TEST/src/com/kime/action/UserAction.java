@@ -1,5 +1,8 @@
 package com.kime.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,7 +10,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.google.gson.Gson;
 import com.kime.biz.UserBIZ;
+import com.kime.model.Result;
 import com.kime.model.User;
 import com.mysql.jdbc.ResultSetInternalMethods;
 import com.opensymphony.xwork2.ActionContext;
@@ -23,12 +28,14 @@ public class UserAction extends ActionSupport {
 	
 	UserBIZ userBIZ;
 	User user;
+	Result result;
+	private InputStream reslutJson;
 	private String name;
 	private String password;
-	private String statusCode;
-	private String message;
 	private String age;
 	private String sex;
+	private String oldpassword;
+	
 	public UserBIZ getUserBIZ() {
 		return userBIZ;
 	}
@@ -39,6 +46,16 @@ public class UserAction extends ActionSupport {
 	}
 	
 
+
+
+	public Result getResult() {
+		return result;
+	}
+
+
+	public void setResult(Result result) {
+		this.result = result;
+	}
 
 
 	public String getName() {
@@ -62,27 +79,16 @@ public class UserAction extends ActionSupport {
 
 	
 	
-	
-	public String getStatusCode() {
-		return statusCode;
+
+	public InputStream getReslutJson() {
+		return reslutJson;
 	}
 
 
-	public void setStatusCode(String statusCode) {
-		this.statusCode = statusCode;
+	public void setReslutJson(InputStream reslutJson) {
+		this.reslutJson = reslutJson;
 	}
 
-
-	public String getMessage() {
-		return message;
-	}
-
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	
 
 	public String getAge() {
 		return age;
@@ -111,6 +117,18 @@ public class UserAction extends ActionSupport {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+
+	
+	
+	public String getOldpassword() {
+		return oldpassword;
+	}
+
+
+	public void setOldpassword(String oldpassword) {
+		this.oldpassword = oldpassword;
 	}
 
 
@@ -150,7 +168,7 @@ public class UserAction extends ActionSupport {
 		
 	}
 	
-	public String Register(){
+	public String Register() throws UnsupportedEncodingException{
 		user.setAge(Integer.parseInt(age));
 		user.setName(name);
 		user.setPassword(password);
@@ -159,31 +177,44 @@ public class UserAction extends ActionSupport {
 		
 		try {
 			userBIZ.register(user);
-			message="注册成功";
-			statusCode="200";	
+			result.setMessage("注册成功");
+			result.setStatusCode("200");
 		} catch (Exception e1) {
-			message=e1.getMessage();
-			statusCode="300";	
+			result.setMessage(e1.getMessage());
+			result.setStatusCode("300");
 			e1.printStackTrace();
 		}
+		reslutJson=new ByteArrayInputStream(new Gson().toJson(result).getBytes("UTF-8"));  
 		return SUCCESS;
 	}
 	
-	public String Change(){
+	public String Change() throws UnsupportedEncodingException{
 		ActionContext actionContext = ActionContext.getContext();  
         Map session = actionContext.getSession();  
-		user=(User)session.get("user");
-		user.setPassword(password);
-		
-		try {
-			userBIZ.change(user);
-			message="修改成功";
-			statusCode="200";	
-		} catch (Exception e1) {
-			message=e1.getMessage();
-			statusCode="300";	
-			e1.printStackTrace();
+        user=(User)session.get("user");
+		if (oldpassword.equals(user.getPassword())) {	
+			if (!password.equals(user.getPassword())) {
+				user.setPassword(password);
+				try {
+					userBIZ.modUser(user);
+					result.setMessage("修改成功");
+					result.setStatusCode("200");
+				} catch (Exception e1) {
+					result.setMessage(e1.getMessage());
+					result.setStatusCode("300");
+					e1.printStackTrace();
+				}
+			}else{
+				result.setMessage("新密码不能与旧密码相同");
+				result.setStatusCode("300");
+			}
+	
 		}
+		else{
+			result.setMessage("旧密码错误");
+			result.setStatusCode("300");
+		}
+		reslutJson=new ByteArrayInputStream(new Gson().toJson(result).getBytes("UTF-8"));  
 		return SUCCESS;
 	}
 	
@@ -193,8 +224,6 @@ public class UserAction extends ActionSupport {
 		ActionContext actionContext = ActionContext.getContext();  
         Map session = actionContext.getSession();  
         session.clear();
-        name="";
-        password="";
         return SUCCESS;
 		
 	}
