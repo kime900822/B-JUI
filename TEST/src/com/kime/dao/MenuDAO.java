@@ -12,9 +12,11 @@ public interface MenuDAO {
 	
 	public Menu getMenuByID(String id);
 	
-	public List getMenuByFatherID(String fatherID);
+	public List getMenuByParentID(String parentID);
 	
 	public void modMenu(Menu menu);
 	
 	public void deleteMenu(Menu menu);
+	
+	public List getParentMenu();
 }

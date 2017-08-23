@@ -35,6 +35,8 @@ function datagrid_tree_beforeDrop(data, targetData, position) {
         dataUrl: 'getAllMenu.action',
         inlineEditMult: false,
         editUrl: 'editMenu.action',
+        editCallback:'getAllMenu.action',
+        delUrl:'deleteMenu.action',
         isTree: 'name',
         addLocation: 'last',
         fieldSortable: false,
@@ -51,7 +53,7 @@ function datagrid_tree_beforeDrop(data, targetData, position) {
         dropOptions: {
             drop: true,
             position: 'before',
-            dropUrl: 'deleteMenu.action',
+            dropUrl: 'editMenu.action',
             beforeDrag: datagrid_tree_beforeDrag,
             beforeDrop: datagrid_tree_beforeDrop,
             afterDrop: 'array'

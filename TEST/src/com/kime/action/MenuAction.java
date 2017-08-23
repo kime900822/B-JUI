@@ -6,7 +6,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.kime.biz.MenuBIZ;
 import com.kime.model.Menu;
@@ -30,9 +36,17 @@ public class MenuAction extends ActionSupport {
 	private InputStream reslutJson;
 	private String json;
 	
+	private String id;
 	
 	
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getJson() {
 		return json;
@@ -95,12 +109,17 @@ public class MenuAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public String getFatherMenu(){
+	public String getFatherMenu() throws UnsupportedEncodingException{
+		HttpServletRequest request=ServletActionContext.getRequest();
+		HttpSession session=request.getSession();
 		
+		lmenu=menuBIZ.getParentMenu();
+		session.setAttribute("parentMent", lmenu); 
 		return SUCCESS;
 	}
 	
-	public String getChildMenu(){
+	public String getChildMenu() throws UnsupportedEncodingException{
+		reslutJson=new ByteArrayInputStream(menuBIZ.getChildMenu(id).getBytes("UTF-8")); 
 		
 		return SUCCESS;
 	}
@@ -124,16 +143,27 @@ public class MenuAction extends ActionSupport {
 	public String editMenu() throws UnsupportedEncodingException{
 		
 		lmenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
-		menu=(Menu) lmenu.get(0);
+
+			
+			try {
+				for(Object o:lmenu){
+					menu=(Menu)o;
+					if (menu.getLevel()==null) {
+						menu.setLevel("0");
+					}
+					if (menu.getOrder()==null) {
+						menu.setOrder("0");
+					}
+					menuBIZ.editMenu(menu);
+				}
+				result.setMessage("保存成功！");
+				result.setStatusCode("200");
+			} catch (Exception e) {
+				result.setMessage(e.getMessage());
+				result.setStatusCode("300");		
+			}
+			
 		
-		try {
-			menuBIZ.editMenu(menu);
-			result.setMessage("保存成功！");
-			result.setStatusCode("200");
-		} catch (Exception e) {
-			result.setMessage(e.getMessage());
-			result.setStatusCode("300");		
-		}
 		reslutJson=new ByteArrayInputStream(new Gson().toJson(result).getBytes("UTF-8"));  
 		return SUCCESS;
 	}

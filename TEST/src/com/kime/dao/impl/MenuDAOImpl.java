@@ -32,9 +32,8 @@ public class MenuDAOImpl extends HibernateDaoSupport implements MenuDAO {
 	}
 
 	@Override
-	public List getMenuByFatherID(String fatherID) {
-		// TODO Auto-generated method stub
-		return null;
+	public List getMenuByParentID(String parentID) {
+		return this.getHibernateTemplate().find("FROM Menu where parentid=? ", new String[]{parentID});
 	}
 
 	@Override
@@ -48,6 +47,12 @@ public class MenuDAOImpl extends HibernateDaoSupport implements MenuDAO {
 	public void deleteMenu(Menu menu) {
 		this.getHibernateTemplate().delete(menu);
 		
+	}
+
+
+	@Override
+	public List getParentMenu() {
+		return this.getHibernateTemplate().find("FROM Menu where level=? ", new String[]{"0"});
 	}
 
 	

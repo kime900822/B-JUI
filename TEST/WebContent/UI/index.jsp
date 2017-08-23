@@ -216,6 +216,11 @@ function bjui_index_exchange() {
                     <li>
                         <a href="1.2" target="_blank">旧版DEMO</a>
                     </li>
+                    <s:iterator var="menu" value="#session['parentMent']">
+                    	<li>
+                    	 <a href="getChildMenu.action?id=${menu.id}" data-toggle="sidenav" data-id-key="targetid">${menu.name}</a>
+                    	</li>
+                    </s:iterator>
                 </ul>
             </nav>
         </div>

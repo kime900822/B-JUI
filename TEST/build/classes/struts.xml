@@ -25,11 +25,14 @@
 	
 	<package name="Struts 2" extends="struts-default">
 		<action name="login" method="Login" class="UserAction">
-			<result name="success" type="redirect">/UI/index.jsp</result>
+			<result name="success" type="redirect">getFatherMenu.action</result>
 			<result name="error" type="redirect">/UI/login.jsp</result>
 		</action>
 		<action name="logout" method="Logout" class="UserAction">
 			<result name="success" type="redirect">/UI/login.jsp</result>
+		</action>
+		<action name="getFatherMenu" method="getFatherMenu" class="MenuAction">
+			<result name="success"  type="redirect">/UI/index.jsp</result>
 		</action>
 	</package>
 	<package name="Struts-json" extends="json-default">
@@ -58,6 +61,13 @@
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
+		<action name="getChildMenu" method="getChildMenu" class="MenuAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>
+		
+		
 	</package>
 </struts>
 

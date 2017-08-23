@@ -11,9 +11,9 @@ public interface MenuBIZ {
 	
 	public List getAllMenu();
 	
-	public List getFatherMenu();
+	public List getParentMenu();
 	
-	public List geiChildMenu();
+	public String getChildMenu(String parentID);
 	
 	public void deleteMenu(Menu menu);
 	
