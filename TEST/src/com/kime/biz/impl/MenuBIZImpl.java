@@ -94,7 +94,7 @@ public class MenuBIZImpl implements MenuBIZ {
 		StringBuilder sb=new StringBuilder();
 		List<Menu> lmenus=menuDao.getMenuByParentID(menu.getId());
 		if (lmenus.size()>0) {
-			sb.append("{\"name\":\""+menu.getName()+"\",children\":[");
+			sb.append("{\"name\":\""+menu.getName()+"\",\"children\":[");
 			for (Menu m : lmenus) {
 				sb.append(getChildMenu_recursion(m));
 			}
