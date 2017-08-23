@@ -101,7 +101,7 @@ public class MenuBIZImpl implements MenuBIZ {
 			sb.deleteCharAt(sb.length()-1);
 			sb.append("]},");
 		}else{
-				sb.append("{\"id\":\""+menu.getId()+"\",");
+				sb.append("{\"id\":\""+menu.getPageid()+"\",");
 				sb.append("\"name\":\""+menu.getName()+"\",");
 				sb.append("\"target\":\""+menu.getTarget()+"\",");
 				sb.append("\"url\":\""+menu.getUrl()+"\"},");

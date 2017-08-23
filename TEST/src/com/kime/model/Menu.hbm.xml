@@ -15,5 +15,6 @@
 			<column name="[order]"></column>
 		</property>
 		<property name="level"></property>
+		<property name="pageid"></property>
 	</class>
 </hibernate-mapping>

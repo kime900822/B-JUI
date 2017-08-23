@@ -9,6 +9,13 @@ public class Menu {
 	 private String url;
 	 private String order;
 	 private String level;
+	 private String pageid;
+	public String getPageid() {
+		return pageid;
+	}
+	public void setPageid(String pageid) {
+		this.pageid = pageid;
+	}
 	public String getId() {
 		return id;
 	}
