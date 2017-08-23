@@ -50,16 +50,18 @@ public class MenuBIZImpl implements MenuBIZ {
 		
 		StringBuilder sb=new StringBuilder();
 		List<Menu> lmenu=menuDao.getMenuByParentID(parentID);
-		sb.append("[");
-		for (Menu m : lmenu) {
-			sb.append(getChildMenu_recursion(m));
+		if (lmenu.size()>0) {
+			sb.append("[");
+			for (Menu m : lmenu) {
+				sb.append(getChildMenu_recursion(m));
+			}
+			sb.deleteCharAt(sb.length()-1);
+			sb.append("]");
+			return sb.toString();
 		}
-		sb.deleteCharAt(sb.length()-1);
-		sb.append("]");
+		else
+			return "";
 		
-
-		String string=sb.toString();
-		return sb.toString();
 		
 		// TODO Auto-generated method stub
 		//return menuDao.getMenuByParentID(menu.getId());

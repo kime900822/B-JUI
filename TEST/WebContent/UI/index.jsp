@@ -213,9 +213,6 @@ function bjui_index_exchange() {
                         <a href="javascript:;" data-toggle="sidenav" data-tree="true" data-tree-options="{onClick:MainMenuClick}" data-id-key="targetid">待续……</a>
                         <script class="items"></script>
                     </li>
-                    <li>
-                        <a href="1.2" target="_blank">旧版DEMO</a>
-                    </li>
                     <s:iterator var="menu" value="#session['parentMent']">
                     	<li>
                     	 <a href="getChildMenu.action?id=${menu.id}" data-toggle="sidenav" data-id-key="targetid">${menu.name}</a>
