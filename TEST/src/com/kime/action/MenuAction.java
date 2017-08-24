@@ -115,11 +115,20 @@ public class MenuAction extends ActionSupport {
 		
 		lmenu=menuBIZ.getParentMenu();
 		session.setAttribute("parentMent", lmenu); 
+		for (Object object : lmenu) {
+			Menu m=(Menu)object;
+			String string=menuBIZ.getChildMenu(m.getId());
+			session.setAttribute(m.getId(), string); 
+		}
+		
 		return SUCCESS;
 	}
 	
 	public String getChildMenu() throws UnsupportedEncodingException{
-		reslutJson=new ByteArrayInputStream(menuBIZ.getChildMenu(id).getBytes("UTF-8")); 
+		
+		HttpServletRequest request=ServletActionContext.getRequest();
+		HttpSession session=request.getSession();
+		reslutJson=new ByteArrayInputStream(session.getAttribute(id).toString().getBytes("UTF-8")); 
 		
 		return SUCCESS;
 	}
