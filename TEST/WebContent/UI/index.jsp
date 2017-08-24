@@ -95,6 +95,9 @@ $(function() {
         theme        : 'green' // 若有Cookie['bjui_theme'],优先选择Cookie['bjui_theme']。皮肤[五种皮肤:default, orange, purple, blue, red, green]
     })
     
+    if('${user.name}'==''){        
+        location.href = 'login.jsp'
+    }
 
     //时钟
     var today = new Date(), time = today.getTime()
@@ -199,19 +202,6 @@ function bjui_index_exchange() {
             </div>
             <nav class="collapse navbar-collapse" id="bjui-navbar-collapse">
                 <ul class="nav navbar-nav navbar-right" id="bjui-hnav-navbar">
-                    <li class="active">
-                        <a href="json/menu-form.json" data-toggle="sidenav" data-id-key="targetid">表单相关</a>
-                    </li>
-                    <li>
-                        <a href="json/menu-base.json" data-toggle="sidenav" data-id-key="targetid">基础组件</a>
-                    </li>
-                    <li>
-                        <a href="json/menu-datagrid.json" data-toggle="sidenav" data-id-key="targetid">数据表格(Datagrid)</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="sidenav" data-tree="true" data-tree-options="{onClick:MainMenuClick}" data-id-key="targetid">待续……</a>
-                        <script class="items"></script>
-                    </li>
                     <s:iterator var="menu" value="#session['parentMent']">
                     	<li>
                     	 <a href="getChildMenu.action?id=${menu.id}" data-toggle="sidenav" data-id-key="targetid">${menu.name}</a>

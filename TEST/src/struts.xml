@@ -23,79 +23,80 @@
 	<!-- <constant name="struts.ui.theme" value="simple" /> -->
 	<constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
 
-
-	<package name="interceptor"  extends="struts-default,json-default">
-	<!-- 拦截器 -->
-    <interceptors>  
-		<interceptor name="loginInterceptor"  
-			class="com.kime.intercept.LoginInterceptor">  
-		</interceptor>  
-		<!-- 拦截器栈 -->  
-		<interceptor-stack name="mystack">  
-			<interceptor-ref name="loginInterceptor"></interceptor-ref>  
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-		</interceptor-stack>  
-	</interceptors>  
-	<!--global-results放的位置顺序不对会报错， 全局变量error -->  
-	<global-results>  
-		<!-- LoginInterceptor中的Action.LOGIN对应找到name -->  
-		<result name="login" type="redirect">/UI/login.jsp</result>          
-	</global-results>
-	</package>
 	
 	
-	<package name="Struts 2" extends="interceptor">
+	
+	<package name="Struts 2" extends="struts-default,json-default">
+		
 
-
+		
+		<!-- 拦截器 -->
+	    <interceptors>  
+			<interceptor name="loginInterceptor"  
+				class="com.kime.intercept.LoginInterceptor">  
+			</interceptor>  
+			<!-- 拦截器栈 -->  
+			<interceptor-stack name="mystack">  
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>  
+			</interceptor-stack>  
+		</interceptors>  
+		
+		<!-- 默认烂拦截器 -->
+		<default-interceptor-ref name="mystack"></default-interceptor-ref>
+	
+		<!--global-results放的位置顺序不对会报错， 全局变量error -->  
+		<global-results>  
+			<!-- LoginInterceptor中的Action.LOGIN对应找到name -->  
+			<result name="login" >/UI/login.jsp</result>         
+		</global-results>
+		
+		
+				
 		<action name="login" method="Login" class="UserAction">
 			<result name="success" type="redirect">/UI/index.jsp</result>
-			<result name="error" type="redirect">/UI/login.jsp</result>		
+			<result name="error" type="redirect">/UI/login.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>		
 		</action>
 		<action name="logout" method="Logout" class="UserAction">
 			<result name="success" type="redirect">/UI/login.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
 		</action>
 
 		<action name="register" method="Register" class="UserAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
-			<interceptor-ref name="mystack"></interceptor-ref>	
 		</action>
 		<action name="change" method="Change" class="UserAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
-			</result>
-			<interceptor-ref name="mystack"></interceptor-ref>	
+			</result>	
 		</action>
 		<action name="getAllMenu" method="getAllMenu" class="MenuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
-			<interceptor-ref name="mystack"></interceptor-ref>	
 		</action>
 		<action name="editMenu" method="editMenu" class="MenuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
-			<interceptor-ref name="mystack"></interceptor-ref>	
 		</action>
 		<action name="deleteMenu" method="deleteMenu" class="MenuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
-			<interceptor-ref name="mystack"></interceptor-ref>	
 		</action>
 		<action name="getChildMenu" method="getChildMenu" class="MenuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
-			<interceptor-ref name="mystack"></interceptor-ref>	
 		</action>
 		<action name="getFatherMenu" method="getFatherMenu" class="MenuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
-			<interceptor-ref name="mystack"></interceptor-ref>	
 		</action>
 		
 	</package>

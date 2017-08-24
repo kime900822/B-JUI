@@ -23,6 +23,7 @@ function datagrid_tree_beforeDrop(data, targetData, position) {
     
     return true
 }
+
 </script>
 <div class="bjui-pageContent">
     <table id="j_datagrid_tree" data-toggle="datagrid" data-options="{
@@ -41,6 +42,8 @@ function datagrid_tree_beforeDrop(data, targetData, position) {
         addLocation: 'last',
         fieldSortable: false,
         columnMenu: false,
+        contextMenuB: true,
+        filterThead: false,
         paging: false,
         treeOptions: {
             expandAll: false,
