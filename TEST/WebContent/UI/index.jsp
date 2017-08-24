@@ -95,10 +95,7 @@ $(function() {
         theme        : 'green' // 若有Cookie['bjui_theme'],优先选择Cookie['bjui_theme']。皮肤[五种皮肤:default, orange, purple, blue, red, green]
     })
     
-    if('${user.name}'==''){    	
-    	location.href = 'login.jsp'
-    }
-    
+
     //时钟
     var today = new Date(), time = today.getTime()
     $('#bjui-date').html(today.formatDate('yyyy/MM/dd'))
@@ -146,6 +143,7 @@ function bjui_index_exchange() {
 <script src="assets/ZeroClipboard.js"></script>
 </head>
 <body>
+<!-- 获取菜单 -->
 <s:action name="getFatherMenu" namespace="/TEST" ></s:action>
     <!--[if lte IE 7]>
         <div id="errorie"><div>您还在使用老掉牙的IE，正常使用系统前请升级您的浏览器到 IE8以上版本 <a target="_blank" href="http://windows.microsoft.com/zh-cn/internet-explorer/ie-8-worldwide-languages">点击升级</a>&nbsp;&nbsp;强烈建议您更改换浏览器：<a href="http://down.tech.sina.com.cn/content/40975.html" target="_blank">谷歌 Chrome</a></div></div>
