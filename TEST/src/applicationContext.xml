@@ -114,6 +114,7 @@
 
 <!-- 配置model -->
 <bean id="Result" class="com.kime.model.Result"></bean>
+<bean id="QueryResult" class="com.kime.model.QueryResult"></bean>
 <bean id="User" class="com.kime.model.User"></bean>
 <bean id="Menu" class="com.kime.model.Menu"></bean>
 
@@ -122,6 +123,7 @@
 	<property name="userBIZ" ref="UserBIZ"/>
 	<property name="user" ref="User"/>
 	<property name="result" ref="Result"/>
+	<property name="qResult" ref="QueryResult"/>
 </bean>
 
 <bean id="MenuAction" class="com.kime.action.MenuAction">

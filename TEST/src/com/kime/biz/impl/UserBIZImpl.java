@@ -28,9 +28,23 @@ public class UserBIZImpl implements UserBIZ {
 	}
 
 	@Override
-	public List<User> getUser(String where) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> getUser(String type,String name,Integer pageSize,Integer pageCurrent) {
+		String where="";
+		if (!"".equals(type)&&type!=null) {
+			where += " type='"+type+"'";
+		}
+		if (!"".equals(name)&&name!=null) {
+			if (!"".equals(where)) {
+				where +=" and ";
+			}
+			where += " name like '%"+name+"%'";
+		}
+		if (!"".equals(where)) {
+			where =" where "+where;
+		}
+
+		
+		return userDao.getUser(where,pageSize , pageCurrent);
 	}
 
 	@Override

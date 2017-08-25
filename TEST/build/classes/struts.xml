@@ -99,6 +99,12 @@
 			</result>
 		</action>
 		
+		<action name="getUser" method="GetUser" class="UserAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>
+		
 	</package>
 </struts>
 

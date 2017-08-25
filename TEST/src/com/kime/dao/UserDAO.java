@@ -26,7 +26,7 @@ public interface UserDAO {
 	 * @param where
 	 * @return
 	 */
-	public List getUser(String where);
+	public List getUser(String where,Integer pageSize,Integer pageCurrent);
 	
 	public void modUser(User user);
 	

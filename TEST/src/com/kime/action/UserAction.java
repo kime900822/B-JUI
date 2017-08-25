@@ -3,6 +3,9 @@ package com.kime.action;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +15,9 @@ import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.Gson;
 import com.kime.biz.UserBIZ;
+import com.kime.model.QueryResult;
 import com.kime.model.Result;
 import com.kime.model.User;
-import com.mysql.jdbc.ResultSetInternalMethods;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -29,13 +32,50 @@ public class UserAction extends ActionSupport {
 	UserBIZ userBIZ;
 	User user;
 	Result result;
+	QueryResult qResult;
 	private InputStream reslutJson;
 	private String name;
 	private String password;
 	private String age;
 	private String sex;
 	private String oldpassword;
+	private String type;
 	
+	
+	private String pageSize;
+	private String pageCurrent;
+	
+	
+	public String getPageSize() {
+		return pageSize;
+	}
+
+
+	public void setPageSize(String pageSize) {
+		this.pageSize = pageSize;
+	}
+
+
+	public String getPageCurrent() {
+		return pageCurrent;
+	}
+
+
+	public void setPageCurrent(String pageCurrent) {
+		this.pageCurrent = pageCurrent;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
 	public UserBIZ getUserBIZ() {
 		return userBIZ;
 	}
@@ -132,6 +172,16 @@ public class UserAction extends ActionSupport {
 	}
 
 
+	public QueryResult getqResult() {
+		return qResult;
+	}
+
+
+	public void setqResult(QueryResult qResult) {
+		this.qResult = qResult;
+	}
+
+
 	public String Login(){
 	
 		HttpServletRequest request=ServletActionContext.getRequest();
@@ -169,11 +219,15 @@ public class UserAction extends ActionSupport {
 	}
 	
 	public String Register() throws UnsupportedEncodingException{
+		
+		Date d1=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:dd");
 		user.setAge(Integer.parseInt(age));
 		user.setName(name);
 		user.setPassword(password);
 		user.setSex(sex);
 		user.setType("1");
+		user.setDate(sdf.format(d1));
 		
 		try {
 			userBIZ.register(user);
@@ -227,5 +281,21 @@ public class UserAction extends ActionSupport {
         return SUCCESS;
 		
 	}
+	
+	public String GetUser() throws UnsupportedEncodingException{
+		
+		if (pageCurrent==null) {
+			pageCurrent="1";
+		}		
+		
+		List luser=userBIZ.getUser(type,name,Integer.parseInt(pageSize),Integer.parseInt(pageCurrent));
+
+		
+		reslutJson=new ByteArrayInputStream(new Gson().toJson(luser).getBytes("UTF-8"));  
+		
+		
+		return SUCCESS;
+	}
 
 }
+

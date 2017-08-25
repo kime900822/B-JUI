@@ -2,6 +2,7 @@ package com.kime.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.kime.dao.UserDAO;
@@ -27,9 +28,12 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public List getUser(String where) {
+	public List getUser(String where,Integer pageSize,Integer pageCurrent) {
 		// TODO Auto-generated method stub
-		return this.getHibernateTemplate().find("FROM User ?", new String[]{where});
+		Session session=this.getSessionFactory().openSession();
+		String hql="FROM User "+where;
+		return session.createQuery(hql).setFirstResult((pageCurrent-1)*pageSize).setMaxResults(pageSize).list();
+		//return this.getHibernateTemplate().find("FROM User "+where);
 	}
 
 	@Override
