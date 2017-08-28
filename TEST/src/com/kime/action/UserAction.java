@@ -44,8 +44,20 @@ public class UserAction extends ActionSupport {
 	
 	private String pageSize;
 	private String pageCurrent;
+	private String callback;
 	
 	
+	
+	public String getCallback() {
+		return callback;
+	}
+
+
+	public void setCallback(String callback) {
+		this.callback = callback;
+	}
+
+
 	public String getPageSize() {
 		return pageSize;
 	}
@@ -284,14 +296,39 @@ public class UserAction extends ActionSupport {
 	
 	public String GetUser() throws UnsupportedEncodingException{
 		
+		String where="";
+		if (!"".equals(type)&&type!=null) {
+			where += " type='"+type+"'";
+		}
+		if (!"".equals(name)&&name!=null) {
+			if (!"".equals(where)) {
+				where +=" and ";
+			}
+			where += " name like '%"+name+"%'";
+		}
+		if (!"".equals(where)) {
+			where =" where "+where;
+		}
 		if (pageCurrent==null) {
 			pageCurrent="1";
 		}		
 		
-		List luser=userBIZ.getUser(type,name,Integer.parseInt(pageSize),Integer.parseInt(pageCurrent));
-
 		
-		reslutJson=new ByteArrayInputStream(new Gson().toJson(luser).getBytes("UTF-8"));  
+		
+		List luser=userBIZ.getUser(where,Integer.parseInt(pageSize),Integer.parseInt(pageCurrent));
+		int total=userBIZ.getUser(where).size();
+		
+		
+		qResult.setList(luser);
+		qResult.setTotalRow(total);
+		qResult.setFirstPage(Integer.parseInt(pageCurrent)==1?true:false);
+		qResult.setPageNumber(Integer.parseInt(pageCurrent));
+		qResult.setLastPage(total/Integer.parseInt(pageSize) +1==Integer.parseInt(pageCurrent)&&Integer.parseInt(pageCurrent)!=1?true:false);
+		qResult.setTotalPage(total/Integer.parseInt(pageSize) +1);
+		qResult.setPageSize(Integer.parseInt(pageSize));
+		String r=callback+"("+new Gson().toJson(qResult)+")";
+		
+		reslutJson=new ByteArrayInputStream(r.getBytes("UTF-8"));  
 		
 		
 		return SUCCESS;

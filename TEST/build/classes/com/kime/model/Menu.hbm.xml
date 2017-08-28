@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.kime.model.Menu" table="t_menu">
+		<id name="id">
+			<generator class="uuid"></generator>
+		</id>
+		<property name="parentid"></property>
+		<property name="name"></property>
+		<property name="target"></property>
+		<property name="url"></property>
+		<property name="order">
+			<column name="[order]"></column>
+		</property>
+		<property name="level"></property>
+		<property name="pageid"></property>
+	</class>
+</hibernate-mapping>

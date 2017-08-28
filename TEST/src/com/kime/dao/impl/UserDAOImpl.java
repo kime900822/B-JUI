@@ -35,6 +35,15 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 		return session.createQuery(hql).setFirstResult((pageCurrent-1)*pageSize).setMaxResults(pageSize).list();
 		//return this.getHibernateTemplate().find("FROM User "+where);
 	}
+	
+	
+
+	@Override
+	public List getUser(String where) {
+		Session session=this.getSessionFactory().openSession();
+		String hql="FROM User "+where;
+		return session.createQuery(hql).list();
+	}
 
 	@Override
 	public void modUser(User user) {
@@ -50,3 +59,5 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
 
 }
+
+

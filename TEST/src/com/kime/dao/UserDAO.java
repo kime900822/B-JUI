@@ -28,6 +28,8 @@ public interface UserDAO {
 	 */
 	public List getUser(String where,Integer pageSize,Integer pageCurrent);
 	
+	public List getUser(String where);
+	
 	public void modUser(User user);
 	
 	public void deleteUser(User user);

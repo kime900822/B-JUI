@@ -27,7 +27,9 @@ public interface UserBIZ {
 	 * @param where
 	 * @return
 	 */
-	public List<User> getUser(String type,String name,Integer pageSize,Integer pageCurrent);
+	public List<User> getUser(String where,Integer pageSize,Integer pageCurrent);
+	
+	public List<User> getUser(String where);
 	
 	/**
 	 * 修改

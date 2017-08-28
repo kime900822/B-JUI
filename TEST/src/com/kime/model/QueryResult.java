@@ -3,23 +3,23 @@ package com.kime.model;
 import java.util.List;
 
 public class QueryResult {
-	private String firstPage;
-	private String lastPage;
+	private boolean firstPage;
+	private boolean lastPage;
 	private List list;
-	private String pageNumber;
-	private String pageSize;
-	private String totalPage;
-	private String totalRow;
-	public String getFirstPage() {
+	private int pageNumber;
+	private int pageSize;
+	private int totalPage;
+	private int totalRow;
+	public boolean isFirstPage() {
 		return firstPage;
 	}
-	public void setFirstPage(String firstPage) {
+	public void setFirstPage(boolean firstPage) {
 		this.firstPage = firstPage;
 	}
-	public String getLastPage() {
+	public boolean isLastPage() {
 		return lastPage;
 	}
-	public void setLastPage(String lastPage) {
+	public void setLastPage(boolean lastPage) {
 		this.lastPage = lastPage;
 	}
 	public List getList() {
@@ -28,30 +28,29 @@ public class QueryResult {
 	public void setList(List list) {
 		this.list = list;
 	}
-	public String getPageNumber() {
+	public int getPageNumber() {
 		return pageNumber;
 	}
-	public void setPageNumber(String pageNumber) {
+	public void setPageNumber(int pageNumber) {
 		this.pageNumber = pageNumber;
 	}
-	public String getPageSize() {
+	public int getPageSize() {
 		return pageSize;
 	}
-	public void setPageSize(String pageSize) {
+	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-	public String getTotalPage() {
+	public int getTotalPage() {
 		return totalPage;
 	}
-	public void setTotalPage(String totalPage) {
+	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
-	public String getTotalRow() {
+	public int getTotalRow() {
 		return totalRow;
 	}
-	public void setTotalRow(String totalRow) {
+	public void setTotalRow(int totalRow) {
 		this.totalRow = totalRow;
 	}
-	
-	
+
 }

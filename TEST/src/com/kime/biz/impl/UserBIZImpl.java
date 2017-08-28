@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.kime.biz.UserBIZ;
 import com.kime.dao.UserDAO;
+import com.kime.model.QueryResult;
 import com.kime.model.User;
 
 public class UserBIZImpl implements UserBIZ {
 	UserDAO userDao;
-	
+
 	public UserDAO getUserDao() {
 		return userDao;
 	}
@@ -28,23 +29,14 @@ public class UserBIZImpl implements UserBIZ {
 	}
 
 	@Override
-	public List<User> getUser(String type,String name,Integer pageSize,Integer pageCurrent) {
-		String where="";
-		if (!"".equals(type)&&type!=null) {
-			where += " type='"+type+"'";
-		}
-		if (!"".equals(name)&&name!=null) {
-			if (!"".equals(where)) {
-				where +=" and ";
-			}
-			where += " name like '%"+name+"%'";
-		}
-		if (!"".equals(where)) {
-			where =" where "+where;
-		}
-
-		
+	public List<User> getUser(String where,Integer pageSize,Integer pageCurrent) {
 		return userDao.getUser(where,pageSize , pageCurrent);
+	}
+
+	
+	@Override
+	public List<User> getUser(String where) {
+		return userDao.getUser(where);
 	}
 
 	@Override
