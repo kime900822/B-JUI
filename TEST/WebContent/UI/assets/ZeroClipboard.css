@@ -56,7 +56,7 @@ pre.prettyprint{border:none; background:transparent;}
     color:#959595;
     text-transform:uppercase;
     letter-spacing:1px;
-    content:"实例："
+    content:'实例：'
 }
 .bs-example+.highlight,.bs-example+.zero-clipboard+.highlight {
     margin:-15px -15px 15px;

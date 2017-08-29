@@ -34,13 +34,15 @@ public class UserAction extends ActionSupport {
 	Result result;
 	QueryResult qResult;
 	private InputStream reslutJson;
+	
 	private String name;
 	private String password;
 	private String age;
 	private String sex;
 	private String oldpassword;
 	private String type;
-	
+	private String id;
+	private String date;
 	
 	private String pageSize;
 	private String pageCurrent;
@@ -48,6 +50,26 @@ public class UserAction extends ActionSupport {
 	
 	
 	
+	public String getDate() {
+		return date;
+	}
+
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
 	public String getCallback() {
 		return callback;
 	}
@@ -238,7 +260,7 @@ public class UserAction extends ActionSupport {
 		user.setName(name);
 		user.setPassword(password);
 		user.setSex(sex);
-		user.setType("1");
+		user.setType("普通用户");
 		user.setDate(sdf.format(d1));
 		
 		try {
@@ -306,6 +328,35 @@ public class UserAction extends ActionSupport {
 			}
 			where += " name like '%"+name+"%'";
 		}
+		if (!"".equals(id)&&id!=null) {
+			if (!"".equals(where)) {
+				where +=" and ";
+			}
+			where += " id like '%"+id+"%'";
+		}
+		
+		if (!"".equals(sex)&&sex!=null) {
+			if (!"".equals(where)) {
+				where +=" and ";
+			}
+			where += " sex = '"+sex+"'";
+		}
+		
+		if (!"".equals(date)&&date!=null) {
+			if (!"".equals(where)) {
+				where +=" and ";
+			}
+			where += " date = '"+date+"'";
+		}
+		
+		
+		if (!"".equals(age)&&age!=null) {
+			if (!"".equals(where)) {
+				where +=" and ";
+			}
+			where += " age = '"+age+"'";
+		}
+		
 		if (!"".equals(where)) {
 			where =" where "+where;
 		}

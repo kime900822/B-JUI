@@ -119,14 +119,14 @@
 <bean id="Menu" class="com.kime.model.Menu"></bean>
 
 <!-- 配置Action -->
-<bean id="UserAction" class="com.kime.action.UserAction">
+<bean id="UserAction" class="com.kime.action.UserAction" scope="prototype">
 	<property name="userBIZ" ref="UserBIZ"/>
 	<property name="user" ref="User"/>
 	<property name="result" ref="Result"/>
 	<property name="qResult" ref="QueryResult"/>
 </bean>
 
-<bean id="MenuAction" class="com.kime.action.MenuAction">
+<bean id="MenuAction" class="com.kime.action.MenuAction" scope="prototype">
 	<property name="menuBIZ" ref="MenuBIZ"/>
 	<property name="menu" ref="Menu"/>
 	<property name="result" ref="Result"/>

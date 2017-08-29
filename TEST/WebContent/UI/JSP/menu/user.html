@@ -1,5 +1,5 @@
 <div class="bjui-pageHeader" style="background-color:#fefefe; border-bottom:none;">
-<form data-toggle="ajaxsearch" data-options="{searchDatagrid:$.CurrentNavtab.find('#datagrid-test-filter')}">
+<form data-toggle="ajaxsearch" data-options="{searchDatagrid:$.CurrentNavtab.find('#datagrid-user-filter')}">
     <fieldset>
         <legend style="font-weight:normal;">页头搜索：</legend>
         <div style="margin:0; padding:1px 5px 5px;">
@@ -18,29 +18,29 @@
 </form>
 </div>
 <div class="bjui-pageContent">
-    <table class="table table-bordered" id="datagrid-test-filter" data-toggle="datagrid" data-options="{
+    <table class="table table-bordered" id="datagrid-user-filter" data-toggle="datagrid" data-options="{
         height: '100%',
-        gridTitle : 'datagrid 页头搜索、自定义编辑示例',
+        gridTitle : '用户管理',
         showToolbar: true,
         toolbarItem: 'add,edit,del,|,import,export,exportf',
         dataUrl: 'getUser.action',
         dataType: 'jsonp',
-        jsonPrefix: 'obj',
-        editMode: {dialog:{width:'800',height:500,title:'编辑挂号信息',mask:true}},
-        editUrl: '../../html/datagrid/datagrid-edit.html?code={code}',
+        editMode: {dialog:{width:'800',height:500,title:'编辑用户信息',mask:true}},
+        editUrl: 'JSP/menu/user-edit.html?id={id}',
         paging: {pageSize:60},
         showCheckboxcol: true,
         linenumberAll: true,
-        importOption: {type:'dialog', options:{url:'../../html/datagrid/datagrid-import.html', width:500, height:300, title:'导入挂号信息'}},
+        importOption: {type:'dialog', options:{url:'../../html/datagrid/datagrid-import.html', width:500, height:300, title:'导入用户信息'}},
         exportOption: {type:'file', options:{url:'http://b-jui.com/demo/export', loadingmask:true}}
     }">
         <thead>
             <tr>
-				<th data-options="{name:'name'}">姓名</th>
-				<th data-options="{name:'sex'}">性別</th>
-				<th data-options="{name:'age'}">年齡</th>
-				<th data-options="{name:'type'}">角色</th>
-                <th data-options="{name:'date',align:'center',type:'date',pattern:'yyyy-MM-dd HH:mm:ss',render:function(value){return value?value.substr(0,16):value}}">註冊日期</th>
+            	<th data-options="{name:'id',width:300,align:'center'}" >编号</th>
+				<th data-options="{name:'name',width:60,align:'center'}">姓名</th>
+				<th data-options="{name:'sex',width:60,align:'center',type:'select',items:[{'男':'男'},{'女':'女'}] }">性別</th>
+				<th data-options="{name:'age',width:60,align:'center'}">年龄</th>
+				<th data-options="{name:'type',width:80,align:'center'}">角色</th>
+                <th data-options="{name:'date',align:'center',width:200,type:'date',pattern:'yyyy-MM-dd HH:mm:ss',render:function(value){return value?value.substr(0,19):value}}">注册日期</th>
             </tr>
         </thead>
     </table>
