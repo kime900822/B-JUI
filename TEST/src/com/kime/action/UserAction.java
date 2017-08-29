@@ -384,6 +384,32 @@ public class UserAction extends ActionSupport {
 		
 		return SUCCESS;
 	}
+	
+	
+	public String ModUser() throws UnsupportedEncodingException{
+		
+		Date d1=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:dd");
+		user.setAge(Integer.parseInt(age));
+		user.setName(name);
+		user.setPassword(password);
+		user.setSex(sex);
+		user.setType("普通用户");
+		user.setDate(sdf.format(d1));
+		user.setId(id);
+		
+		try {
+			userBIZ.modUser(user);	
+			user=userBIZ.getUser(" where id='"+id+"'").get(0);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		String r=callback+"("+new Gson().toJson(user)+")";
+		reslutJson=new ByteArrayInputStream(r.getBytes("UTF-8"));  
+		return SUCCESS;
+		
+		
+	}
 
 }
 

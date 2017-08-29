@@ -105,6 +105,12 @@
 			</result>
 		</action>
 		
+		<action name="modUser" method="ModUser" class="UserAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>
+		
 	</package>
 </struts>
 
