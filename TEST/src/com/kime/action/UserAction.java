@@ -394,13 +394,17 @@ public class UserAction extends ActionSupport {
 		user.setName(name);
 		user.setPassword(password);
 		user.setSex(sex);
-		user.setType("普通用户");
+		user.setType(type);
 		user.setDate(sdf.format(d1));
 		user.setId(id);
 		
 		try {
-			userBIZ.modUser(user);	
-			user=userBIZ.getUser(" where id='"+id+"'").get(0);
+			if (id==null||"".equals(id)) {
+				userBIZ.register(user);	
+			}else{
+				userBIZ.modUser(user);
+			}			
+			user=userBIZ.getUser(" where name='"+name+"'").get(0);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
