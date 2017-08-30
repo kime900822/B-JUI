@@ -96,14 +96,10 @@ $(function() {
         theme        : 'green' // 若有Cookie['bjui_theme'],优先选择Cookie['bjui_theme']。皮肤[五种皮肤:default, orange, purple, blue, red, green]
     })
     
-     if('${user.name}'==''){        
+    if('${user.name}'==''){        
         location.href = 'login.jsp'
     }
 
- 
-	if('${login_message}'!=''){
-		BJUI.alertmsg('error', '${login_message}');
-	}
  
     //时钟
     var today = new Date(), time = today.getTime()

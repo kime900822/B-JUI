@@ -67,8 +67,31 @@ public class UserAction extends ActionSupport {
 	private String pageCurrent;
 	private String callback;
 	private String fileName;
+	private String upfile;
+	private String first;
 	
 	
+	
+	public String getUpfile() {
+		return upfile;
+	}
+
+
+	public void setUpfile(String upfile) {
+		this.upfile = upfile;
+	}
+
+
+	public String getFirst() {
+		return first;
+	}
+
+
+	public void setFirst(String first) {
+		this.first = first;
+	}
+
+
 	public String getFileName() {
 		return fileName;
 	}
