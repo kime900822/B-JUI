@@ -22,7 +22,8 @@
 	<!-- 默认视觉主题 这个配置之后label什么都不会显示-->
 	<!-- <constant name="struts.ui.theme" value="simple" /> -->
 	<constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
-
+	<!-- 设置上传文件的临时文件夹,默认使用javax.servlet.context.tempdir -->
+    <constant name="struts.multipart.saveDir " value="/upload" />
 	
 	
 	
@@ -122,7 +123,25 @@
                 <param name="inputName">reslutJson</param>            
                 <param name="contentDisposition">attachment;filename=${fileName}</param>
                 <param name="bufferSize">1024</param>
-                <param name=""></param>
+            </result>
+		</action>
+		
+		
+		<action name="importUser" method="ImportUser" class="UserAction">
+           <!-- 配置fileUpload的拦截器 -->
+<!--            <interceptor-ref name="fileUpload"> -->
+           <!-- 文件过滤 -->
+           <!-- <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param> -->
+           <!-- 允许后缀名为png,bmp,jpg,doc,xls的文件上传 -->     
+			<!-- <param name="allowedExtensions">  
+   				 xlsx,xls  
+			</param> 		
+           配置允许上传的文件大小
+           <param name="maximumSize">4000000</param>
+           </interceptor-ref>
+           <interceptor-ref name="defaultStack"></interceptor-ref>  -->
+           <result type="stream">
+                <param name="inputName">reslutJson</param>               
             </result>
 		</action>
 	</package>

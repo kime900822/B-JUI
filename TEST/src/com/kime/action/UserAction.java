@@ -2,6 +2,10 @@ package com.kime.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -19,6 +23,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.struts2.ServletActionContext;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -67,17 +72,16 @@ public class UserAction extends ActionSupport {
 	private String pageCurrent;
 	private String callback;
 	private String fileName;
-	private String upfile;
+	private File upfile;
 	private String first;
 	
-	
-	
-	public String getUpfile() {
+
+	public File getUpfile() {
 		return upfile;
 	}
 
 
-	public void setUpfile(String upfile) {
+	public void setUpfile(File upfile) {
 		this.upfile = upfile;
 	}
 
@@ -657,15 +661,44 @@ public class UserAction extends ActionSupport {
     /**
      * excel导入
      * @return
+     * @throws IOException 
+     * @throws FileNotFoundException 
      */
-    public String  InportUser(){
-    	
-    	
-    	
-    	
-    	
+    public String  ImportUser() throws FileNotFoundException, IOException{
+        try {
+	    	if (upfile!=null) {
+	        	POIFSFileSystem fs=new POIFSFileSystem(new FileInputStream(upfile));   
+	        	HSSFWorkbook wb = new HSSFWorkbook(fs); 
+	        	HSSFSheet sheet = wb.getSheetAt(0); 
+	            // 循环遍历表,sheet.getLastRowNum()是获取一个表最后一条记录的记录号
+	            for (int i = Integer.parseInt(first)-1 ; i <= sheet.getLastRowNum(); i++) {
+	                // 创建一个行对象
+	                HSSFRow row = sheet.getRow(i);
+	
+	    				User user=new User();
+	    				user.setName(row.getCell(0).getStringCellValue());
+	    				user.setPassword(row.getCell(1).getStringCellValue());
+	    				user.setAge(new Double(row.getCell(2).getNumericCellValue()).intValue());
+	    				user.setSex(row.getCell(3).getStringCellValue());
+	    				user.setType(row.getCell(4).getStringCellValue());
+	    				user.setDate(row.getCell(5).getStringCellValue());
+	    				userBIZ.register(user);
+	            }
+	            wb.close();
+	            fs.close();
+			}else{
+				result.setMessage("上传失败");
+				result.setStatusCode("300");
+			}
+		} catch (Exception e) {
+			result.setMessage(e.getMessage());
+			result.setStatusCode("300");
+		}
+        reslutJson=new ByteArrayInputStream(new Gson().toJson(result).getBytes("UTF-8"));  
     	return SUCCESS;
     }
+    
+    
     
 	
 
