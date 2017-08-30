@@ -111,6 +111,11 @@
 			</result>
 		</action>
 		
+		<action name="deleteUser" method="DeleteUser" class="UserAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>
 	</package>
 </struts>
 

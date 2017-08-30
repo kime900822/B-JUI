@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kime.biz.UserBIZ;
+import com.kime.model.Menu;
 import com.kime.model.QueryResult;
 import com.kime.model.Result;
 import com.kime.model.User;
@@ -34,7 +37,18 @@ public class UserAction extends ActionSupport {
 	Result result;
 	QueryResult qResult;
 	private InputStream reslutJson;
+	private String json;
 	
+	public String getJson() {
+		return json;
+	}
+
+
+	public void setJson(String json) {
+		this.json = json;
+	}
+
+
 	private String name;
 	private String password;
 	private String age;
@@ -216,6 +230,10 @@ public class UserAction extends ActionSupport {
 	}
 
 
+	/**
+	 * 用户登录
+	 * @return
+	 */
 	public String Login(){
 	
 		HttpServletRequest request=ServletActionContext.getRequest();
@@ -252,6 +270,12 @@ public class UserAction extends ActionSupport {
 		
 	}
 	
+	
+	/**
+	 * 注册账号
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	public String Register() throws UnsupportedEncodingException{
 		
 		Date d1=new Date();
@@ -276,6 +300,11 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	/**
+	 * 修改密码
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	public String Change() throws UnsupportedEncodingException{
 		ActionContext actionContext = ActionContext.getContext();  
         Map session = actionContext.getSession();  
@@ -306,7 +335,10 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	
+	/**
+	 * 注销登录
+	 * @return
+	 */
 	public String Logout(){
 		
 		ActionContext actionContext = ActionContext.getContext();  
@@ -316,6 +348,11 @@ public class UserAction extends ActionSupport {
 		
 	}
 	
+	/**
+	 * 用户查询
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	public String GetUser() throws UnsupportedEncodingException{
 		
 		String where="";
@@ -385,7 +422,11 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	
+	/**
+	 * 用户编辑（删除，保存）
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	public String ModUser() throws UnsupportedEncodingException{
 		
 		Date d1=new Date();
@@ -413,6 +454,24 @@ public class UserAction extends ActionSupport {
 		return SUCCESS;
 		
 		
+	}
+	
+	
+	public String DeleteUser() throws UnsupportedEncodingException{
+		List<User> luser=new Gson().fromJson(json, new TypeToken<ArrayList<User>>() {}.getType());
+		try {
+			for (User u : luser) {
+				userBIZ.deleteUser(u);			
+			}
+			result.setMessage("删除成功！");
+			result.setStatusCode("200");
+		} catch (Exception e) {
+			result.setMessage(e.getMessage());
+			result.setStatusCode("300");
+		}
+
+		reslutJson=new ByteArrayInputStream(new Gson().toJson(result).getBytes("UTF-8"));  
+		return SUCCESS;
 	}
 
 }

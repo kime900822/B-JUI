@@ -13,7 +13,7 @@
     
 <div class="bjui-pageContent">
     <div class="bs-example" >
-        <form action="modUser.action?callback=?" class="user-edit-form" data-toggle="validate" data-data-type="jsonp">
+        <form action="modUser.action?callback=?" class="datagrid-edit-form" data-toggle="validate" data-data-type="jsonp">
             <div class="bjui-row col-2">
             	<input type="text" name="id" value="${param.id}" style="display:none;"/>
                 <label class="row-label">姓名</label>
