@@ -22,7 +22,7 @@
         height: '100%',
         gridTitle : '用户管理',
         showToolbar: true,
-        toolbarItem: 'add,edit,del,|,import,export,exportf',
+        toolbarItem: 'add,edit,del,|,import,export',
         dataUrl: 'getUser.action',
         dataType: 'jsonp',
         editMode: {dialog:{width:'800',height:270,title:'编辑用户信息',mask:true}},
@@ -31,12 +31,13 @@
         paging: {pageSize:60},
         showCheckboxcol: true,
         linenumberAll: true,
-        importOption: {type:'dialog', options:{url:'../../html/datagrid/datagrid-import.html', width:500, height:300, title:'导入用户信息'}},
-        exportOption: {type:'file', options:{url:'http://b-jui.com/demo/export', loadingmask:true}}
+        hScrollbar: true,
+        importOption: {type:'dialog', options:{url:'JSP/menu/user-import.html', width:500, height:300, title:'导入用户信息'}},
+        exportOption: {type:'file', options:{url:'exportUserExcel.action', loadingmask:false}}
     }">
         <thead>
             <tr>
-            	<th data-options="{name:'id',width:300,align:'center'}" >编号</th>
+            	<th data-options="{name:'id',width:350,align:'center'}" >编号</th>
 				<th data-options="{name:'name',width:150,align:'center'}">姓名</th>
 				<th data-options="{name:'sex',width:60,align:'center',type:'select',items:[{'男':'男'},{'女':'女'}] }">性別</th>
 				<th data-options="{name:'age',width:60,align:'center'}">年龄</th>
