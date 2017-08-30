@@ -48,7 +48,7 @@
 		<!--global-results放的位置顺序不对会报错， 全局变量error -->  
 		<global-results>  
 			<!-- LoginInterceptor中的Action.LOGIN对应找到name -->  
-			<result name="login" >/UI/login.jsp</result>         
+			<result name="login" type="redirect">/UI/login.jsp</result>         
 		</global-results>
 		
 		
@@ -122,6 +122,7 @@
                 <param name="inputName">reslutJson</param>            
                 <param name="contentDisposition">attachment;filename=${fileName}</param>
                 <param name="bufferSize">1024</param>
+                <param name=""></param>
             </result>
 		</action>
 	</package>

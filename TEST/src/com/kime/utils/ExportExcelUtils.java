@@ -37,17 +37,6 @@ import org.apache.poi.hssf.util.HSSFColor;
  */
 public class ExportExcelUtils<T> {
 
-    public void exportExcel(Collection<T> dataset, ByteArrayOutputStream out) {
-        this.exportExcel("意见反馈报表", null, dataset, out, "yyyy-MM-dd");
-    }
-
-    public void exportExcel(String[] headers, Collection<T> dataset, ByteArrayOutputStream out) {
-        this.exportExcel("意见反馈报表", headers, dataset, out, "yyyy-MM-dd");
-    }
-
-    public void exportExcel(String[] headers, Collection<T> dataset, ByteArrayOutputStream out, String pattern) {
-        this.exportExcel("意见反馈报表", headers, dataset, out, pattern);
-    }
         /**
          * 这是一个通用的方法，利用了JAVA的反射机制，可以将放置在JAVA集合中并且符号一定条件的数据以EXCEL 的形式输出到指定IO设备上
          *

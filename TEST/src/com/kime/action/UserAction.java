@@ -631,8 +631,18 @@ public class UserAction extends ActionSupport {
         return "success";
     }
     
-    
- 
+    /**
+     * excel导入
+     * @return
+     */
+    public String  InportUser(){
+    	
+    	
+    	
+    	
+    	
+    	return SUCCESS;
+    }
     
 	
 
