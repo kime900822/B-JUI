@@ -3,7 +3,7 @@
 "-//Hibernate/Hibernate mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.kime.model.Menu" table="t_menu">
+	<class name="com.kime.model.Menu" table="t_role">
 		<id name="id">
 			<generator class="uuid"></generator>
 		</id>

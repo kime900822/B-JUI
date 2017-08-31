@@ -144,6 +144,27 @@
                 <param name="inputName">reslutJson</param>               
             </result>
 		</action>
+		
+		<action name="getRole" method="GetRole" class="RoleAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>	
+		
+		<action name="deleteRole" method="DeleteRole" class="RoleAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>	
+		
+		<action name="modeRole" method="ModeRole" class="RoleAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>	
+		
+		
+		
 	</package>
 </struts>
 

@@ -20,26 +20,30 @@ public class RoleBIZImpl implements RoleBIZ {
 	}
 
 	@Override
-	public List Query() {
-		// TODO Auto-generated method stub
-		return null;
+	public List GetRole(String where,int pageSize,int pageCurrent) {
+		return roleDao.Query(where,pageSize,pageCurrent);
+	}
+
+	@Override
+	public List GetRole(String where) {
+		return roleDao.Query(where);
 	}
 
 	@Override
 	public void Mod(Role role) {
-		// TODO Auto-generated method stub
+		roleDao.Mod(role);
 		
 	}
 
 	@Override
 	public void Delete(Role role) {
-		// TODO Auto-generated method stub
+		roleDao.Delete(role);
 		
 	}
 
 	@Override
 	public void Save(Role role) {
-		// TODO Auto-generated method stub
+		roleDao.Save(role);
 		
 	}
 

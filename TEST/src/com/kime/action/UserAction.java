@@ -545,30 +545,26 @@ public class UserAction extends ActionSupport {
             HSSFCell cell;
 
             cell = row.createCell(0);
-            cell.setCellValue("ID");
-            cell.setCellStyle(style);
-
-            cell = row.createCell(1);
             cell.setCellValue("姓名");
             cell.setCellStyle(style);
 
-            cell = row.createCell(2);
+            cell = row.createCell(1);
             cell.setCellValue("密码");
             cell.setCellStyle(style);
 
-            cell = row.createCell(3);
+            cell = row.createCell(2);
             cell.setCellValue("年龄");
             cell.setCellStyle(style);
 
-            cell = row.createCell(4);
+            cell = row.createCell(3);
             cell.setCellValue("性别");
             cell.setCellStyle(style);
 
-            cell = row.createCell(5);
+            cell = row.createCell(4);
             cell.setCellValue("用户类别");
             cell.setCellStyle(style);
 
-            cell = row.createCell(6);
+            cell = row.createCell(5);
             cell.setCellValue("日期");
             cell.setCellStyle(style);
             
@@ -630,13 +626,12 @@ public class UserAction extends ActionSupport {
             for (User user : lUsers) {
             	i++;
                 row = sheet.createRow(i);
-                row.createCell(0).setCellValue(user.getId());
-                row.createCell(1).setCellValue(user.getName());
-                row.createCell(2).setCellValue(user.getPassword());
-                row.createCell(3).setCellValue(user.getAge());
-                row.createCell(4).setCellValue(user.getSex());
-                row.createCell(5).setCellValue(user.getType());
-                row.createCell(6).setCellValue(user.getDate());
+                row.createCell(0).setCellValue(user.getName());
+                row.createCell(1).setCellValue(user.getPassword());
+                row.createCell(2).setCellValue(user.getAge());
+                row.createCell(3).setCellValue(user.getSex());
+                row.createCell(4).setCellValue(user.getType());
+                row.createCell(5).setCellValue(user.getDate());
 			}
             
 

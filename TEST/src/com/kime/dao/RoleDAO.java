@@ -5,11 +5,15 @@ import java.util.List;
 import com.kime.model.Role;
 
 public interface RoleDAO {
-	public List Query();
+	public List Query(String where);
 	
 	public void Delete(Role role);
 	
 	public void Save(Role role);
 	
 	public void Mod(Role role);
+	
+	public List Query(String where,int pageSize,int pageCurrent);
+	
+	public void Delete(String id);
 }
