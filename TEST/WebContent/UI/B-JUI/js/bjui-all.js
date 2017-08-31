@@ -9571,7 +9571,7 @@
         
         if (typeof options.paging === 'string') options.paging = options.paging.toObj()
         that.paging = $.extend({}, {pageSize:30, selectPageSize:'30,60,90', pageCurrent:1, total:0, showPagenum:5}, (typeof options.paging === 'object') && options.paging)  	
-        if (typeof options.paging ==='false'){
+        if (options.paging ==false){
             that.paging = $.extend({}, {pageSize:10000}, (typeof options.paging === 'object') && options.paging)  	
         }
         that.$thead = that.$element.find('> thead')

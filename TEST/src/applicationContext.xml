@@ -61,6 +61,7 @@
 	 	<list>
 	 		<value>com/kime/model/User.hbm.xml</value>
 	 		<value>com/kime/model/Menu.hbm.xml</value>
+	 		<value>com/kime/model/Role.hbm.xml</value>
 	 	</list>
 	 </property>
 </bean>
@@ -103,6 +104,15 @@
 	<property name="target" ref="MenuDaoTarget" />   
 </bean>
 
+<bean id="RoleDaoTarget" class="com.kime.dao.impl.RoleDAOImpl">
+	<property name="sessionFactory" ref="sessionFactory" />
+</bean>
+    
+<bean id="RoleDAO" parent="transactionBase" >  
+	<property name="target" ref="RoleDaoTarget" />   
+</bean>
+
+
 
 <!-- 配置BIZ -->
 <bean id="UserBIZ" class="com.kime.biz.impl.UserBIZImpl">
@@ -111,12 +121,17 @@
 <bean id="MenuBIZ" class="com.kime.biz.impl.MenuBIZImpl">
 	<property name="menuDao" ref="MenuDAO" />
 </bean>
+<bean id="RoleBIZ" class="com.kime.biz.impl.RoleBIZImpl">
+	<property name="roleDao" ref="RoleDAO" />
+</bean>
+
 
 <!-- 配置model -->
 <bean id="Result" class="com.kime.model.Result"></bean>
 <bean id="QueryResult" class="com.kime.model.QueryResult"></bean>
 <bean id="User" class="com.kime.model.User"></bean>
 <bean id="Menu" class="com.kime.model.Menu"></bean>
+<bean id="Role" class="com.kime.model.Role"></bean>
 
 <!-- 配置Action -->
 <bean id="UserAction" class="com.kime.action.UserAction" scope="prototype">
@@ -129,6 +144,12 @@
 <bean id="MenuAction" class="com.kime.action.MenuAction" scope="prototype">
 	<property name="menuBIZ" ref="MenuBIZ"/>
 	<property name="menu" ref="Menu"/>
+	<property name="result" ref="Result"/>
+</bean>
+
+<bean id="RoleAction" class="com.kime.action.RoleAction" scope="prototype">
+	<property name="roleBIZ" ref="RoleBIZ"/>
+	<property name="role" ref="Role"/>
 	<property name="result" ref="Result"/>
 </bean>
 

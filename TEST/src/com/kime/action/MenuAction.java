@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.kime.biz.MenuBIZ;
 import com.kime.model.Menu;
@@ -30,7 +29,6 @@ public class MenuAction extends ActionSupport {
 	
 	private Menu menu;
 	
-	private List lmenu;
 	
 	private Result result;
 	private InputStream reslutJson;
@@ -81,16 +79,6 @@ public class MenuAction extends ActionSupport {
 	}
 
 	
-
-	
-	public List<Menu> getLmenu() {
-		return lmenu;
-	}
-
-	public void setLmenu(List<Menu> lmenu) {
-		this.lmenu = lmenu;
-	}
-
 	public Result getResult() {
 		return result;
 	}
@@ -103,7 +91,7 @@ public class MenuAction extends ActionSupport {
 	
 
 	public String getAllMenu() throws UnsupportedEncodingException{		
-		lmenu = menuBIZ.getAllMenu();
+		List lmenu = menuBIZ.getAllMenu();
 		reslutJson=new ByteArrayInputStream(new Gson().toJson(lmenu).getBytes("UTF-8"));  
 
 		return SUCCESS;
@@ -113,7 +101,7 @@ public class MenuAction extends ActionSupport {
 		HttpServletRequest request=ServletActionContext.getRequest();
 		HttpSession session=request.getSession();
 		
-		lmenu=menuBIZ.getParentMenu();
+		List lmenu=menuBIZ.getParentMenu();
 		session.setAttribute("parentMent", lmenu); 
 		for (Object object : lmenu) {
 			Menu m=(Menu)object;
@@ -134,7 +122,7 @@ public class MenuAction extends ActionSupport {
 	}
 	
 	public String deleteMenu() throws UnsupportedEncodingException{
-		lmenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
+		List lmenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
 		menu=(Menu) lmenu.get(0);
 		try {
 			menuBIZ.deleteMenu(menu);
@@ -151,7 +139,7 @@ public class MenuAction extends ActionSupport {
 	
 	public String editMenu() throws UnsupportedEncodingException{
 		
-		lmenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
+		List lmenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
 
 			
 			try {

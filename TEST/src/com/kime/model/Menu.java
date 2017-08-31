@@ -10,6 +10,15 @@ public class Menu {
 	 private String order;
 	 private String level;
 	 private String pageid;
+	 private boolean used;
+	 
+	 
+	public boolean isUsed() {
+		return used;
+	}
+	public void setUsed(boolean used) {
+		this.used = used;
+	}
 	public String getPageid() {
 		return pageid;
 	}
