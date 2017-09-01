@@ -7,7 +7,8 @@
 	if('${param.sex}'=='女'){
 		$.CurrentDialog.find('#j_user_edit_sex_nv').attr("checked","checked");
 	}
-	
+
+
 
 </script> 
     
@@ -31,11 +32,10 @@
                 </div>
                 <label class="row-label">用户类别</label>
                 <div class="row-input required">
-                    <select name="type" data-toggle="selectpicker" id="j_user_edit_type" data-rule="required" data-width="100%" >
-                        <option value=""></option>
-                        <option value="普通用户" selected>普通用户</option>
-                        <option value="管理员">管理员</option>
-                       
+                    <select name="type" data-toggle="selectpicker" id="j_user_edit_type" data-rule="required" data-width="100%"  >
+                         <option value=""></option>
+                        <option value="普通用户" selected></option>
+                        <option value="管理员" >管理员</option>      
                     </select>
                 </div>
                 <label class="row-label">密码</label>

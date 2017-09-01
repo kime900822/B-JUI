@@ -1,21 +1,16 @@
-<div class="bjui-pageHeader" style="background-color:#fff; border-bottom:none;">
-    <div class="bs-callout bs-callout-warning">
-        <h4>用户类别</h4>
-    </div>
-</div>
 <div class="bjui-pageContent">
     <table class="table table-bordered" data-toggle="datagrid" data-options="{
         height: '100%',
         gridTitle : '用户类别',
         showToolbar: true,
-        toolbarItem: 'add,edit,del',
+        toolbarItem: 'add,edit,del,save,cancel',
         local: 'local',
         dataUrl: 'getRole.action',
         editUrl: 'modeRole.action',
-        delUrl: 'deleteRole.action'
+        delUrl: 'deleteRole.action',
         paging: {pageSize:50, pageCurrent:1},
         linenumberAll: true,
-        sortAll: false
+        hScrollbar: true
     }">
         <thead>
             <tr>

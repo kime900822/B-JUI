@@ -1,3 +1,23 @@
+<script type="text/javascript">
+
+function datagrid_tree_department() {
+	BJUI.ajax('doajax', {
+	    url: 'getAllRole.action',
+	    loadingmask: false,
+	    okCallback: function(json) {
+	    	var s=json;
+	    	return eval('(' + json + ')'); 
+	    }
+	})
+  
+}
+
+
+
+</script>
+
+
+
 <div class="bjui-pageHeader" style="background-color:#fefefe; border-bottom:none;">
 <form data-toggle="ajaxsearch" data-options="{searchDatagrid:$.CurrentNavtab.find('#datagrid-user-filter')}">
     <fieldset>
@@ -28,7 +48,7 @@
         editMode: {dialog:{width:'800',height:270,title:'编辑用户信息',mask:true}},
         delUrl:'deleteUser.action',
         editUrl: 'JSP/user/user-edit.jsp?id={id}&name={name}&sex={sex}&age={age}&type={type}&date={date}&password={password}',
-        paging: {pageSize:60},
+        paging: {pageSize:60, pageCurrent:1},
         showCheckboxcol: true,
         linenumberAll: true,
         contextMenuB: true,
@@ -42,7 +62,7 @@
 				<th data-options="{name:'name',width:150,align:'center'}">姓名</th>
 				<th data-options="{name:'sex',width:60,align:'center',type:'select',items:[{'男':'男'},{'女':'女'}] }">性別</th>
 				<th data-options="{name:'age',width:60,align:'center'}">年龄</th>
-				<th data-options="{name:'type',width:80,align:'center',type:'select',items:[{'普通用户':'普通用户'},{'管理员':'管理员'}]}">角色</th>
+				<th data-options="{name:'type',width:80,align:'center',type:'select',items:[{'管理员':'管理员'},{'普通用户':'普通用户'}]}">角色</th>
 				<th data-options="{name:'password',width:150,align:'center',hide:'true'}">密码</th>
                 <th data-options="{name:'date',align:'center',width:200,type:'date',pattern:'yyyy-MM-dd HH:mm:ss',render:function(value){return value?value.substr(0,19):value}}">注册日期</th>
             </tr>

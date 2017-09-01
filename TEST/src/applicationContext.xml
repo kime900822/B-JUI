@@ -151,6 +151,7 @@
 	<property name="roleBIZ" ref="RoleBIZ"/>
 	<property name="role" ref="Role"/>
 	<property name="result" ref="Result"/>
+	<property name="qResult" ref="QueryResult"/>
 </bean>
 
 

@@ -163,7 +163,11 @@
 			</result>
 		</action>	
 		
-		
+		<action name="getAllRole" method="GetAllRole" class="RoleAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>	
 		
 	</package>
 </struts>

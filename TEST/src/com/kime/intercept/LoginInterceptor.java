@@ -20,7 +20,7 @@ public class LoginInterceptor extends AbstractInterceptor  {
 		}
 		else
 		{
-			session.put("login_message","请先登录！");
+			session.put("login_message","请登录！");
 			return Action.LOGIN; 
 		}
 		

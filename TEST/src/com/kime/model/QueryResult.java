@@ -2,7 +2,7 @@ package com.kime.model;
 
 import java.util.List;
 
-public class QueryResult {
+public class QueryResult  {
 	private boolean firstPage;
 	private boolean lastPage;
 	private List list;

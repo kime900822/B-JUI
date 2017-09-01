@@ -439,11 +439,7 @@ public class UserAction extends ActionSupport {
 		if (!"".equals(where)) {
 			where =" where "+where;
 		}
-		if (pageCurrent==null) {
-			pageCurrent="1";
-		}		
-		
-		
+				
 		
 		List luser=userBIZ.getUser(where,Integer.parseInt(pageSize),Integer.parseInt(pageCurrent));
 		int total=userBIZ.getUser(where).size();

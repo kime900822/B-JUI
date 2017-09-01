@@ -6,7 +6,11 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.catalina.filters.SetCharacterEncodingFilter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -111,13 +115,10 @@ public class RoleAction extends ActionSupport {
 	
 	public String GetRole() throws UnsupportedEncodingException{
 	
-		if (pageCurrent==null) {
-			pageCurrent="1";
-		}	
-		
-		List lrole=roleBIZ.GetRole(" WHERE MENU='0' ");
+		List lrole=roleBIZ.GetRole(" WHERE MENU='0' ",Integer.parseInt(pageSize),Integer.parseInt(pageCurrent));
 		int total=roleBIZ.GetRole(" WHERE MENU='0' ").size();
 		
+
 		qResult.setList(lrole);
 		qResult.setTotalRow(total);
 		qResult.setFirstPage(Integer.parseInt(pageCurrent)==1?true:false);
@@ -125,9 +126,9 @@ public class RoleAction extends ActionSupport {
 		qResult.setLastPage(total/Integer.parseInt(pageSize) +1==Integer.parseInt(pageCurrent)&&Integer.parseInt(pageCurrent)!=1?true:false);
 		qResult.setTotalPage(total/Integer.parseInt(pageSize) +1);
 		qResult.setPageSize(Integer.parseInt(pageSize));
-		String r=callback+"("+new Gson().toJson(qResult)+")";
+		//String r=callback+"("+new Gson().toJson(qResult)+")";
 		
-		reslutJson=new ByteArrayInputStream(r.getBytes("UTF-8"));  
+		reslutJson=new ByteArrayInputStream(new Gson().toJson(qResult).getBytes("UTF-8"));  
 		
 		return SUCCESS;
 	}
@@ -154,16 +155,20 @@ public class RoleAction extends ActionSupport {
 	
 	public String ModeRole() throws UnsupportedEncodingException{
 		
-		role.setId(id);
-		role.setName(name);
-		role.setMenu("0");
+		List<Role> lRoles=new Gson().fromJson(json, new TypeToken<ArrayList<Role>>() {}.getType());
 		
 		try {
-			if (id==null||"".equals(id)) {
-				roleBIZ.Save(role);
-			}else{
-				roleBIZ.Mod(role);
-			}		
+			for (Role r : lRoles) {
+				r.setMenu("0");
+				if (r.getId()==null||"".equals(r.getId())) {
+					roleBIZ.Save(r);
+				}else{
+					roleBIZ.Mod(r);
+				}	
+				
+			}
+			
+	
 			result.setMessage("保存成功！");
 			result.setStatusCode("200");
 		} catch (Exception e1) {
@@ -175,6 +180,22 @@ public class RoleAction extends ActionSupport {
 		return SUCCESS;
 		
 		
+	}
+	
+	public String GetAllRole() throws UnsupportedEncodingException{
+		List<Role> lRole=roleBIZ.GetRole(" WHERE MENU='0' ");
+		StringBuilder stringBuilder =new StringBuilder();
+		stringBuilder.append("[");
+		for (Role role : lRole) {
+			stringBuilder.append("{\'"+role.getId()+"\':\'"+role.getName()+"\'}");
+			stringBuilder.append(",");
+		}
+		stringBuilder.deleteCharAt(stringBuilder.length()-1);
+		stringBuilder.append("]");
+		String string=stringBuilder.toString();
+		reslutJson=new ByteArrayInputStream(new Gson().toJson(stringBuilder).getBytes("UTF-8"));  
+		
+		return SUCCESS;
 	}
 	
 }
