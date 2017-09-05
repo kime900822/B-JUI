@@ -2,6 +2,7 @@ package com.kime.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.kime.dao.MenuDAO;
@@ -53,6 +54,13 @@ public class MenuDAOImpl extends HibernateDaoSupport implements MenuDAO {
 	@Override
 	public List getParentMenu() {
 		return this.getHibernateTemplate().find("FROM Menu where level=? ORDER BY order", new String[]{"0"});
+	}
+
+
+	@Override
+	public List getMeny(String hql) {
+		Session session=this.getSessionFactory().openSession();
+		return session.createSQLQuery(hql).list();
 	}
 
 	

@@ -159,7 +159,8 @@ public class RoleAction extends ActionSupport {
 		
 		try {
 			for (Role r : lRoles) {
-				r.setMenu("0");
+				r.setLevel("-1");
+				r.setOrder("-1");
 				if (r.getId()==null||"".equals(r.getId())) {
 					roleBIZ.Save(r);
 				}else{

@@ -12,6 +12,24 @@ function datagrid_tree_beforeDrag(tr, data) {
 
 
 </script>
+
+<div class="bjui-pageHeader" style="background-color:#fefefe; border-bottom:none;">
+<form data-toggle="ajaxsearch" data-options="{searchDatagrid:$.CurrentNavtab.find('#datagrid-user-filter')}">
+    <fieldset>
+        <legend style="font-weight:normal;">选择类别：</legend>
+        <div style="margin:0; padding:1px 5px 5px;">
+             <select name="type" data-toggle="selectpicker" id="j_user_edit_type" data-rule="required" data-width="100%"  >
+                    <option value=""></option>
+                    <option value="普通用户" selected></option>
+                    <option value="管理员" >管理员</option>      
+             </select>
+             <div class="btn-group">
+                <button type="submit" class="btn-green" data-icon="search">查询</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+</div>
 <div class="bjui-pageContent">
     <table id="j_datagrid_tree" data-toggle="datagrid" data-options="{
         width: '100%',
@@ -20,9 +38,9 @@ function datagrid_tree_beforeDrag(tr, data) {
         showToolbar: true,
         toolbarItem:'save,|,cancel',
         local: 'local',
-        dataUrl: 'getAllMenu.action',
+        dataUrl: 'getRoleMenu.action',
         inlineEditMult: false,
-        editUrl: 'editMenu.action',
+        editUrl: 'editRoleMenu.action',
         isTree: 'name',
         addLocation: 'last',
         fieldSortable: false,

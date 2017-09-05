@@ -17,5 +17,6 @@ public interface MenuBIZ {
 	
 	public void deleteMenu(Menu menu);
 	
+	public List getMenu(String type);
 	
 }

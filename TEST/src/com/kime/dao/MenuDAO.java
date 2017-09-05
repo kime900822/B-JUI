@@ -19,4 +19,6 @@ public interface MenuDAO {
 	public void deleteMenu(Menu menu);
 	
 	public List getParentMenu();
+	
+	public List getMeny(String hql);
 }

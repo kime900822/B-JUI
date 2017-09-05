@@ -92,6 +92,14 @@ public class MenuBIZImpl implements MenuBIZ {
 		
 	}
 	
+	@Override
+	public List getMenu(String type) {
+		String hql="FROM Menu";
+		return menuDao.getMeny(hql);
+
+		
+	}
+
 	public StringBuilder getChildMenu_recursion(Menu menu){
 		StringBuilder sb=new StringBuilder();
 		List<Menu> lmenus=menuDao.getMenuByParentID(menu.getId());

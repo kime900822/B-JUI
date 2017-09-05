@@ -3,7 +3,8 @@ package com.kime.model;
 public class Role {
 	private String id;
 	private String name;
-	private String menu;
+	private String level;
+	private String order;
 	public String getId() {
 		return id;
 	}
@@ -16,11 +17,17 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getMenu() {
-		return menu;
+	public String getLevel() {
+		return level;
 	}
-	public void setMenu(String menu) {
-		this.menu = menu;
+	public void setLevel(String level) {
+		this.level = level;
 	}
-	
+	public String getOrder() {
+		return order;
+	}
+	public void setOrder(String order) {
+		this.order = order;
+	}
+
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,8 +36,17 @@ public class MenuAction extends ActionSupport {
 	private String json;
 	
 	private String id;
+	private String type;
 	
 	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getId() {
 		return id;
@@ -162,6 +172,16 @@ public class MenuAction extends ActionSupport {
 			
 		
 		reslutJson=new ByteArrayInputStream(new Gson().toJson(result).getBytes("UTF-8"));  
+		return SUCCESS;
+	}
+	
+	
+	public String GetRoleMenu() throws UnsupportedEncodingException{
+		
+		List lmenu = menuBIZ.getMenu(type);
+		
+		reslutJson=new ByteArrayInputStream(new Gson().toJson(lmenu).getBytes("UTF-8"));  
+		
 		return SUCCESS;
 	}
 	
