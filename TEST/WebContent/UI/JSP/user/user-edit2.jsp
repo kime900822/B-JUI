@@ -2,23 +2,12 @@
     pageEncoding="UTF-8"%>
  <script type="text/javascript">
 
+ 	$.CurrentDialog.find('#j_user_edit_type').val('${param.type}');
+	
+	if('${param.sex}'=='女'){
+		$.CurrentDialog.find('#j_user_edit_sex_nv').attr("checked","checked");
+	}
 
-		BJUI.ajax('doajax', {
-		    url: 'getAllRole.action',
-		    loadingmask: false,
-		    okCallback: function(json, options) {
-                $.each(json, function (i, item) {
-                    $.CurrentDialog.find('#j_user_edit_type').append("<option value='" + item.name + "'>" + item.name + "</option>")           
-                })
-                $.CurrentDialog.find('#j_user_edit_type').selectpicker('val','${param.type}');
-                $.CurrentDialog.find('#j_user_edit_type').selectpicker('refresh');
-		    }
-		})	
-		
-		if('${param.sex}'=='女'){
-			$.CurrentDialog.find('#j_user_edit_sex_nv').attr("checked","checked");
-		}
-		
 
 
 </script> 
@@ -44,7 +33,9 @@
                 <label class="row-label">用户类别</label>
                 <div class="row-input required">
                     <select name="type" data-toggle="selectpicker" id="j_user_edit_type" data-rule="required" data-width="100%"  >
-                         <option value="" selected></option>
+                         <option value=""></option>
+                        <option value="普通用户" selected></option>
+                        <option value="管理员" >管理员</option>      
                     </select>
                 </div>
                 <label class="row-label">密码</label>

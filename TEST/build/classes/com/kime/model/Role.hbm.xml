@@ -4,13 +4,13 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="com.kime.model.Role" table="t_role">
-		<id name="id">
-			<generator class="uuid"></generator>
+		<id name="name">
+			<generator class="native"></generator>
 		</id>
-		<property name="name"></property>
 		<property name="order">
 			<column name="[order]"></column>
 		</property>
 		<property name="level"></property>
+		<property name="description"></property>
 	</class>
 </hibernate-mapping>

@@ -12253,7 +12253,6 @@
                     $input = $('<select name="'+ n.name +'" data-toggle="selectpicker"'+ attrs +'></select>')
                         .append(BJUI.doRegional('<option value="">#all#</option>', regional))
                         .append($input.html())
-                        
                     $input.val('') // for IE8
                 }
             }

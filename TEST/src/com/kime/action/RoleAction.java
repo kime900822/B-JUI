@@ -35,11 +35,23 @@ public class RoleAction extends ActionSupport {
 	private String pageCurrent;
 	private String callback;
 	
-	private String id;
 	private String name;
-	private String menu;
+	private String level;
+	private String description;
 	
 	
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public String getCallback() {
 		return callback;
 	}
@@ -70,23 +82,11 @@ public class RoleAction extends ActionSupport {
 	public void setPageCurrent(String pageCurrent) {
 		this.pageCurrent = pageCurrent;
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getMenu() {
-		return menu;
-	}
-	public void setMenu(String menu) {
-		this.menu = menu;
 	}
 	public InputStream getReslutJson() {
 		return reslutJson;
@@ -115,8 +115,8 @@ public class RoleAction extends ActionSupport {
 	
 	public String GetRole() throws UnsupportedEncodingException{
 	
-		List lrole=roleBIZ.GetRole(" WHERE MENU='0' ",Integer.parseInt(pageSize),Integer.parseInt(pageCurrent));
-		int total=roleBIZ.GetRole(" WHERE MENU='0' ").size();
+		List lrole=roleBIZ.GetRole(" WHERE level='-1' ",Integer.parseInt(pageSize),Integer.parseInt(pageCurrent));
+		int total=roleBIZ.GetRole(" WHERE level='-1' ").size();
 		
 
 		qResult.setList(lrole);
@@ -159,9 +159,8 @@ public class RoleAction extends ActionSupport {
 		
 		try {
 			for (Role r : lRoles) {
-				r.setLevel("-1");
-				r.setOrder("-1");
-				if (r.getId()==null||"".equals(r.getId())) {
+				if (r.getLevel()==null||"".equals(r.getLevel())) {
+					r.setLevel("-1");
 					roleBIZ.Save(r);
 				}else{
 					roleBIZ.Mod(r);
@@ -184,19 +183,38 @@ public class RoleAction extends ActionSupport {
 	}
 	
 	public String GetAllRole() throws UnsupportedEncodingException{
-		List<Role> lRole=roleBIZ.GetRole(" WHERE MENU='0' ");
-		StringBuilder stringBuilder =new StringBuilder();
-		stringBuilder.append("[");
-		for (Role role : lRole) {
-			stringBuilder.append("{\'"+role.getId()+"\':\'"+role.getName()+"\'}");
-			stringBuilder.append(",");
-		}
-		stringBuilder.deleteCharAt(stringBuilder.length()-1);
-		stringBuilder.append("]");
-		String string=stringBuilder.toString();
-		reslutJson=new ByteArrayInputStream(new Gson().toJson(stringBuilder).getBytes("UTF-8"));  
+		
+		List<Role> lRole=roleBIZ.GetRole(" WHERE level='-1' ");
+//		StringBuilder stringBuilder =new StringBuilder();
+//		stringBuilder.append("[");
+//		for (Role role : lRole) {
+//			stringBuilder.append("{\'name\':\'"+role.getName()+"\'}");
+//			stringBuilder.append(",");
+//		}
+//		stringBuilder.deleteCharAt(stringBuilder.length()-1);
+//		stringBuilder.append("]");
+//		String string=stringBuilder.toString();
+		reslutJson=new ByteArrayInputStream(new Gson().toJson(lRole).getBytes("UTF-8"));  
 		
 		return SUCCESS;
 	}
+	
+	
+//	public String GetAllRole() throws UnsupportedEncodingException{
+//		
+//		List<Role> lRole=roleBIZ.GetRole(" WHERE level='-1' ");
+//		StringBuilder stringBuilder =new StringBuilder();
+//		stringBuilder.append("[");
+//		for (Role role : lRole) {
+//			stringBuilder.append("{\'"+role.getName()+"\':\'"+role.getName()+"\'}");
+//			stringBuilder.append(",");
+//		}
+//		stringBuilder.deleteCharAt(stringBuilder.length()-1);
+//		stringBuilder.append("]");
+//		String string=stringBuilder.toString();
+//		reslutJson=new ByteArrayInputStream(new Gson().toJson(string).getBytes("UTF-8"));  
+//		
+//		return SUCCESS;
+//	}
 	
 }
