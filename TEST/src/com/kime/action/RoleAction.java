@@ -10,7 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.catalina.filters.SetCharacterEncodingFilter;
+import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,6 +25,10 @@ import com.kime.model.Role;
 import com.kime.model.User;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * @author kime
+ *
+ */
 public class RoleAction extends ActionSupport {
 
 	RoleBIZ roleBIZ;
@@ -159,18 +167,26 @@ public class RoleAction extends ActionSupport {
 		
 		try {
 			for (Role r : lRoles) {
-				if (r.getLevel()==null||"".equals(r.getLevel())) {
+				if (r.getId()==null||"".equals(r.getId())) {
 					r.setLevel("-1");
-					roleBIZ.Save(r);
+					int i=roleBIZ.GetRole(" WHERE name='"+r.getName()+"'").size();
+					if (i>0) {
+						result.setMessage("名称不能重复！");
+						result.setStatusCode("300");
+					}else{
+						roleBIZ.Save(r);
+						result.setMessage("保存成功！");
+						result.setStatusCode("200");
+					}
+					
 				}else{
 					roleBIZ.Mod(r);
+					result.setMessage("保存成功！");
+					result.setStatusCode("200");
 				}	
 				
 			}
-			
-	
-			result.setMessage("保存成功！");
-			result.setStatusCode("200");
+					
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			result.setMessage(e1.getMessage());
@@ -200,21 +216,23 @@ public class RoleAction extends ActionSupport {
 	}
 	
 	
-//	public String GetAllRole() throws UnsupportedEncodingException{
-//		
-//		List<Role> lRole=roleBIZ.GetRole(" WHERE level='-1' ");
-//		StringBuilder stringBuilder =new StringBuilder();
-//		stringBuilder.append("[");
-//		for (Role role : lRole) {
-//			stringBuilder.append("{\'"+role.getName()+"\':\'"+role.getName()+"\'}");
-//			stringBuilder.append(",");
-//		}
-//		stringBuilder.deleteCharAt(stringBuilder.length()-1);
-//		stringBuilder.append("]");
-//		String string=stringBuilder.toString();
-//		reslutJson=new ByteArrayInputStream(new Gson().toJson(string).getBytes("UTF-8"));  
-//		
-//		return SUCCESS;
-//	}
+	public String GetAllRole_User() throws UnsupportedEncodingException{
+		
+		List<Role> lRole=roleBIZ.GetRole(" WHERE level='-1' ");
+		StringBuilder stringBuilder =new StringBuilder();
+		stringBuilder.append("[");
+		for (Role role : lRole) {
+			stringBuilder.append("{\'"+role.getName()+"\':\'"+role.getName()+"\'}");
+			stringBuilder.append(",");
+		}
+		stringBuilder.deleteCharAt(stringBuilder.length()-1);
+		stringBuilder.append("]");
+		String string=stringBuilder.toString();
+		HttpServletRequest request=ServletActionContext.getRequest();
+		HttpSession session=request.getSession();
+		session.setAttribute("allrole", string);
+		
+		return SUCCESS;
+	}
 	
 }

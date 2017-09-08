@@ -1,29 +1,6 @@
-<script type="text/javascript">
-
-
-function datagrid_tree_department() {
-
-	BJUI.ajax('doajax', {
-	    url: 'getAllRole.action',
-	    loadingmask: false, 
-	    okCallback: function(json) {
-	    	var tArray = new Array();
-	    	var len=json.length;
-	    	for(var k=0;k<len;k++){    //一维长度为i,i为变量，可以根据实际情况改变  
-	    		tArray[json[k].name]=json[k].name;	
-	    	} 	
-	    	return tArray
-	    }
-	})
-	
-}
-
-
-
-
-</script>
-
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 
 <div class="bjui-pageHeader" style="background-color:#fefefe; border-bottom:none;">
 <form data-toggle="ajaxsearch" data-options="{searchDatagrid:$.CurrentNavtab.find('#datagrid-user-filter')}">
@@ -69,7 +46,7 @@ function datagrid_tree_department() {
 				<th data-options="{name:'name',width:150,align:'center'}">姓名</th>
 				<th data-options="{name:'sex',width:60,align:'center',type:'select',items:[{'男':'男'},{'女':'女'}] }">性別</th>
 				<th data-options="{name:'age',width:60,align:'center'}">年龄</th>
-				<th data-options="{name:'type',width:80,align:'center',type:'select',items:datagrid_tree_department}">角色</th>
+				<th data-options="{name:'type',width:80,align:'center',type:'select',items:${allrole}}">角色</th>
 				<th data-options="{name:'password',width:150,align:'center',hide:'true'}">密码</th>
                 <th data-options="{name:'date',align:'center',width:200,type:'date',pattern:'yyyy-MM-dd HH:mm:ss',render:function(value){return value?value.substr(0,19):value}}">注册日期</th>
             </tr>
