@@ -10,6 +10,20 @@ function datagrid_tree_beforeDrag(tr, data) {
 	return false
 }
 
+
+BJUI.ajax('doajax', {
+    url: 'getAllRole.action',
+    loadingmask: false,
+    okCallback: function(json, options) {
+        $.each(json, function (i, item) {
+            $.CurrentNavtab.find('#j_user_edit_type').append("<option value='" + item.name + "'>" + item.name + "</option>")           
+        })
+        $.CurrentNavtab.find('#j_user_edit_type').selectpicker('val','${param.type}');
+        $.CurrentNavtab.find('#j_user_edit_type').selectpicker('refresh');
+    }
+})	
+
+
 </script>
 
 <div class="bjui-pageHeader" style="background-color:#fefefe; border-bottom:none;">
@@ -18,9 +32,7 @@ function datagrid_tree_beforeDrag(tr, data) {
         <legend style="font-weight:normal;">选择类别：</legend>
         <div style="margin:0; padding:1px 5px 5px;">
              <select name="type" data-toggle="selectpicker" id="j_user_edit_type" data-rule="required" data-width="100%"  >
-                    <option value=""></option>
-                    <option value="普通用户" selected></option>
-                    <option value="管理员" >管理员</option>      
+                    <option value=""></option>   
              </select>
              <div class="btn-group">
                 <button type="submit" class="btn-green" data-icon="search">查询</button>
