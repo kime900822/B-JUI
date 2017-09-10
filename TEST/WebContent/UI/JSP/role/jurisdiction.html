@@ -27,7 +27,7 @@ BJUI.ajax('doajax', {
 </script>
 
 <div class="bjui-pageHeader" style="background-color:#fefefe; border-bottom:none;">
-<form data-toggle="ajaxsearch" data-options="{searchDatagrid:$.CurrentNavtab.find('#datagrid-user-filter')}">
+<form data-toggle="ajaxsearch" data-options="{searchDatagrid:$.CurrentNavtab.find('#j_datagrid_jur')}">
     <fieldset>
         <legend style="font-weight:normal;">选择类别：</legend>
         <div style="margin:0; padding:1px 5px 5px;">
@@ -42,7 +42,7 @@ BJUI.ajax('doajax', {
 </form>
 </div>
 <div class="bjui-pageContent">
-    <table id="j_datagrid_tree" data-toggle="datagrid" data-options="{
+    <table id="j_datagrid_jur" data-toggle="datagrid" data-options="{
         width: '100%',
         height: '100%',
         gridTitle: '权限管理',
@@ -71,6 +71,8 @@ BJUI.ajax('doajax', {
         <thead>
             <tr>
                 <th data-options="{name:'name', align:'left', width:300, edit:false}">菜单名</th>
+                <th data-options="{name:'level', align:'left', width:100, edit:false,hide:'true'}"></th>
+                <th data-options="{name:'order', align:'left', width:100, edit:false,hide:'true'}"></th>
                 <th data-options="{name:'used', align:'center',width:70,type:'boolean',render:function(value){return value ? '√' : '×'}}">是否启用</th>
                 <th data-options="{render:datagrid_tree_operation}">操作列</th>
             </tr>

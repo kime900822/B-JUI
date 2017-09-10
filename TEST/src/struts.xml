@@ -175,6 +175,22 @@
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
+		
+		
+		<action name="getRoleMenu" method="GetRoleMenu" class="MenuAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>
+		
+		<action name="editRoleMenu" method="EditRoleMenu" class="MenuAction">
+			<result type="stream">
+				<param name="inputName">reslutJson</param>
+			</result>
+		</action>
+		
+		
+		
 	</package>
 </struts>
 

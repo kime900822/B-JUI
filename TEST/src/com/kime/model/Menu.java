@@ -11,7 +11,10 @@ public class Menu {
 	 private String level;
 	 private String pageid;
 	 private boolean used;
-	 
+	
+	{
+		used=false;				
+	}
 	 
 	public boolean isUsed() {
 		return used;

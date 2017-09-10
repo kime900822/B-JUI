@@ -15,8 +15,10 @@ import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kime.biz.MenuBIZ;
+import com.kime.biz.RoleBIZ;
 import com.kime.model.Menu;
 import com.kime.model.Result;
+import com.kime.model.Role;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class MenuAction extends ActionSupport {
@@ -27,18 +29,45 @@ public class MenuAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	private MenuBIZ menuBIZ;
-	
+	private RoleBIZ roleBIZ;
 	private Menu menu;
+
 	
 	
+	public RoleBIZ getRoleBIZ() {
+		return roleBIZ;
+	}
+
+	public void setRoleBIZ(RoleBIZ roleBIZ) {
+		this.roleBIZ = roleBIZ;
+	}
+
+
 	private Result result;
 	private InputStream reslutJson;
 	private String json;
 	
 	private String id;
 	private String type;
+	private String level;
+	private String order;
 	
-	
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
+	}
 
 	public String getType() {
 		return type;
@@ -178,11 +207,57 @@ public class MenuAction extends ActionSupport {
 	
 	public String GetRoleMenu() throws UnsupportedEncodingException{
 		
-		List lmenu = menuBIZ.getMenu(type);
+		List<Menu> lmenu = menuBIZ.getAllMenu();
+		List<Role> lrole=roleBIZ.GetRole(" WHERE NAME='"+type+"' AND level<>'-1'");
+		
+		for (Role r : lrole) {
+			List<Role> l=menuBIZ.getMenu("where level='"+r.getLevel()+"' and order='"+r.getOrder()+"'");
+			if (l.size()>0) {
+				for (Menu m : lmenu) {
+					if (m.getLevel().equals(l.get(0).getLevel()) && m.getOrder().equals(l.get(0).getOrder())) {
+						m.setUsed(true);
+					}
+				}
+			}
+			
+		}
 		
 		reslutJson=new ByteArrayInputStream(new Gson().toJson(lmenu).getBytes("UTF-8"));  
 		
 		return SUCCESS;
 	}
+	
+	public String EditRoleMenu() throws UnsupportedEncodingException{
+		List lMenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
+		Menu menu=(Menu)lMenu.get(0);
+		Role role=(Role)roleBIZ.GetRole(" WHERE NAME='"+type+"' ").get(0);
+		role.setLevel(level);
+		role.setOrder(order);
+		if (menu.isUsed()) {
+			try {
+				roleBIZ.Save(role);
+				result.setStatusCode("200");
+				result.setMessage("保存成功");
+			} catch (Exception e) {
+				result.setStatusCode("300");
+				result.setMessage(e.getMessage());
+				// TODO: handle exception
+			}
+		}else{
+			try {
+				roleBIZ.Delete(role);
+				result.setStatusCode("200");
+				result.setMessage("保存成功");
+			} catch (Exception e) {
+				result.setStatusCode("300");
+				result.setMessage(e.getMessage());
+				// TODO: handle exception
+			}
+			
+		}
+		reslutJson=new ByteArrayInputStream(new Gson().toJson(result).getBytes("UTF-8")); 	
+		return SUCCESS;
+	}
+	
 	
 }

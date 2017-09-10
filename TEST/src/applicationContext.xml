@@ -144,6 +144,7 @@
 <bean id="MenuAction" class="com.kime.action.MenuAction" scope="prototype">
 	<property name="menuBIZ" ref="MenuBIZ"/>
 	<property name="menu" ref="Menu"/>
+	<property name="roleBIZ" ref="RoleBIZ"/>
 	<property name="result" ref="Result"/>
 </bean>
 

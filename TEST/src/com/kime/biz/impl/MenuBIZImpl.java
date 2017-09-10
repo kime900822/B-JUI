@@ -93,9 +93,9 @@ public class MenuBIZImpl implements MenuBIZ {
 	}
 	
 	@Override
-	public List getMenu(String type) {
-		String hql="FROM Menu";
-		return menuDao.getMeny(hql);
+	public List getMenu(String where) {
+		String hql="FROM Menu "+where;
+		return menuDao.getMenu(hql);
 
 		
 	}
