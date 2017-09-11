@@ -19,6 +19,7 @@ import com.kime.biz.RoleBIZ;
 import com.kime.model.Menu;
 import com.kime.model.Result;
 import com.kime.model.Role;
+import com.kime.model.User;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class MenuAction extends ActionSupport {
@@ -121,14 +122,31 @@ public class MenuAction extends ActionSupport {
 	public String getFatherMenu() throws UnsupportedEncodingException{
 		HttpServletRequest request=ServletActionContext.getRequest();
 		HttpSession session=request.getSession();
+		User user=(User)session.getAttribute("user");
+		List<Role> lRoles=roleBIZ.GetRole(" where name='"+user.getType()+"' AND level='0' ORDER BY order ");
+		List<Menu> lMenus=new ArrayList<>();
+		for (Role r : lRoles) {
+			List<Menu> l=menuBIZ.getMenu(r.getLevel(),r.getOrder());
+			if (l.size()>0) {
+				lMenus.add(l.get(0));
+			}
+		}
 		
-		List lmenu=menuBIZ.getParentMenu();
-		session.setAttribute("parentMent", lmenu); 
-		for (Object object : lmenu) {
+		session.setAttribute("parentMent", lMenus); 
+		for (Object object : lMenus) {
 			Menu m=(Menu)object;
 			String string=menuBIZ.getChildMenu(m.getId());
 			session.setAttribute(m.getId(), string); 
 		}
+		
+		
+//		List lmenu=menuBIZ.getParentMenu();
+//		session.setAttribute("parentMent", lmenu); 
+//		for (Object object : lmenu) {
+//			Menu m=(Menu)object;
+//			String string=menuBIZ.getChildMenu(m.getId());
+//			session.setAttribute(m.getId(), string); 
+//		}
 		
 		return SUCCESS;
 	}

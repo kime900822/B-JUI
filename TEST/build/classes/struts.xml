@@ -68,7 +68,9 @@
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>	
 		</action>
+		
 		<action name="change" method="Change" class="UserAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
