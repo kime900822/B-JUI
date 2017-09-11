@@ -10,8 +10,16 @@ public class Menu {
 	 private String order;
 	 private String level;
 	 private String pageid;
+	 
 	 private boolean used;
-	
+	 private String type;
+	 
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	{
 		used=false;				
 	}

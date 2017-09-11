@@ -58,9 +58,8 @@ public class MenuDAOImpl extends HibernateDaoSupport implements MenuDAO {
 
 
 	@Override
-	public List getMenu(String hql) {
-		Session session=this.getSessionFactory().openSession();
-		return session.createSQLQuery(hql).list();
+	public List getMenu(String level,String order) {
+		return this.getHibernateTemplate().find("FROM Menu  where level=? AND order=?", new String[]{level,order});
 	}
 
 	

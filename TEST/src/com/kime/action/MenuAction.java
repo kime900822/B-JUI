@@ -49,25 +49,7 @@ public class MenuAction extends ActionSupport {
 	
 	private String id;
 	private String type;
-	private String level;
-	private String order;
 	
-
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
-	}
-
-	public String getOrder() {
-		return order;
-	}
-
-	public void setOrder(String order) {
-		this.order = order;
-	}
 
 	public String getType() {
 		return type;
@@ -210,8 +192,12 @@ public class MenuAction extends ActionSupport {
 		List<Menu> lmenu = menuBIZ.getAllMenu();
 		List<Role> lrole=roleBIZ.GetRole(" WHERE NAME='"+type+"' AND level<>'-1'");
 		
+		for (Menu menu : lmenu) {
+			menu.setType(type);
+		}
+		
 		for (Role r : lrole) {
-			List<Role> l=menuBIZ.getMenu("where level='"+r.getLevel()+"' and order='"+r.getOrder()+"'");
+			List<Menu> l=menuBIZ.getMenu(r.getLevel(),r.getOrder());
 			if (l.size()>0) {
 				for (Menu m : lmenu) {
 					if (m.getLevel().equals(l.get(0).getLevel()) && m.getOrder().equals(l.get(0).getOrder())) {
@@ -230,31 +216,39 @@ public class MenuAction extends ActionSupport {
 	public String EditRoleMenu() throws UnsupportedEncodingException{
 		List lMenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
 		Menu menu=(Menu)lMenu.get(0);
-		Role role=(Role)roleBIZ.GetRole(" WHERE NAME='"+type+"' ").get(0);
-		role.setLevel(level);
-		role.setOrder(order);
-		if (menu.isUsed()) {
-			try {
-				roleBIZ.Save(role);
-				result.setStatusCode("200");
-				result.setMessage("保存成功");
-			} catch (Exception e) {
-				result.setStatusCode("300");
-				result.setMessage(e.getMessage());
-				// TODO: handle exception
-			}
+		
+		if ("".equals(menu.getType())||menu.getType()==null) {
+			result.setStatusCode("300");
+			result.setMessage("请选择用户类别查询后再试");
 		}else{
-			try {
-				roleBIZ.Delete(role);
-				result.setStatusCode("200");
-				result.setMessage("保存成功");
-			} catch (Exception e) {
-				result.setStatusCode("300");
-				result.setMessage(e.getMessage());
-				// TODO: handle exception
+			Role role=(Role)roleBIZ.GetRole(" WHERE NAME='"+menu.getType()+"' ").get(0);
+			role.setLevel(menu.getLevel());
+			role.setOrder(menu.getOrder());
+			if (menu.isUsed()) {
+				try {
+					roleBIZ.Save(role);
+					result.setStatusCode("200");
+					result.setMessage("保存成功");
+				} catch (Exception e) {
+					result.setStatusCode("300");
+					result.setMessage(e.getMessage());
+					// TODO: handle exception
+				}
+			}else{
+				try {
+					roleBIZ.Delete(role);
+					result.setStatusCode("200");
+					result.setMessage("保存成功");
+				} catch (Exception e) {
+					result.setStatusCode("300");
+					result.setMessage(e.getMessage());
+					// TODO: handle exception
+				}
+				
 			}
 			
 		}
+
 		reslutJson=new ByteArrayInputStream(new Gson().toJson(result).getBytes("UTF-8")); 	
 		return SUCCESS;
 	}

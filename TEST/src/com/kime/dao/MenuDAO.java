@@ -20,5 +20,5 @@ public interface MenuDAO {
 	
 	public List getParentMenu();
 	
-	public List getMenu(String hql);
+	public List getMenu(String level,String order);
 }
