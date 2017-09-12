@@ -7,7 +7,6 @@ public class Role {
 	private String level;
 	private String order;
 	private String description;
-
 	
 	
 	public String getId() {

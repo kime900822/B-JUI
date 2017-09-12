@@ -5,7 +5,7 @@
 <hibernate-mapping>
 	<class name="com.kime.model.Role" table="t_role">
 		<id name="id">
-			<generator class="uuid"></generator>
+			<generator class="assigned"></generator>
 		</id>
 		<property name="name"></property>
 		<property name="order">

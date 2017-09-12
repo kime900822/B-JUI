@@ -19,4 +19,6 @@ public interface MenuBIZ {
 	
 	public List getMenu(String level,String order);
 	
+	public Menu getMenuById(String id);
+	
 }

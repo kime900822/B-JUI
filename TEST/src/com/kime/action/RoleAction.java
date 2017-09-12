@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,7 +47,6 @@ public class RoleAction extends ActionSupport {
 	private String name;
 	private String level;
 	private String description;
-	
 	
 	public String getLevel() {
 		return level;
@@ -168,6 +168,7 @@ public class RoleAction extends ActionSupport {
 		try {
 			for (Role r : lRoles) {
 				if (r.getId()==null||"".equals(r.getId())) {
+					r.setId(UUID.randomUUID().toString().replaceAll("-", ""));;
 					r.setLevel("-1");
 					int i=roleBIZ.GetRole(" WHERE name='"+r.getName()+"'").size();
 					if (i>0) {
@@ -201,15 +202,6 @@ public class RoleAction extends ActionSupport {
 	public String GetAllRole() throws UnsupportedEncodingException{
 		
 		List<Role> lRole=roleBIZ.GetRole(" WHERE level='-1' ");
-//		StringBuilder stringBuilder =new StringBuilder();
-//		stringBuilder.append("[");
-//		for (Role role : lRole) {
-//			stringBuilder.append("{\'name\':\'"+role.getName()+"\'}");
-//			stringBuilder.append(",");
-//		}
-//		stringBuilder.deleteCharAt(stringBuilder.length()-1);
-//		stringBuilder.append("]");
-//		String string=stringBuilder.toString();
 		reslutJson=new ByteArrayInputStream(new Gson().toJson(lRole).getBytes("UTF-8"));  
 		
 		return SUCCESS;

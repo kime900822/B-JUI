@@ -132,21 +132,21 @@ public class MenuAction extends ActionSupport {
 			}
 		}
 		
-		session.setAttribute("parentMent", lMenus); 
-		for (Object object : lMenus) {
-			Menu m=(Menu)object;
-			String string=menuBIZ.getChildMenu(m.getId());
-			session.setAttribute(m.getId(), string); 
-		}
-		
-		
-//		List lmenu=menuBIZ.getParentMenu();
-//		session.setAttribute("parentMent", lmenu); 
-//		for (Object object : lmenu) {
+//		session.setAttribute("parentMent", lMenus); 
+//		for (Object object : lMenus) {
 //			Menu m=(Menu)object;
 //			String string=menuBIZ.getChildMenu(m.getId());
 //			session.setAttribute(m.getId(), string); 
 //		}
+		
+		
+		List lmenu=menuBIZ.getParentMenu();
+		session.setAttribute("parentMent", lmenu); 
+		for (Object object : lmenu) {
+			Menu m=(Menu)object;
+			String string=menuBIZ.getChildMenu(m.getId());
+			session.setAttribute(m.getId(), string); 
+		}
 		
 		return SUCCESS;
 	}
@@ -215,13 +215,10 @@ public class MenuAction extends ActionSupport {
 		}
 		
 		for (Role r : lrole) {
-			List<Menu> l=menuBIZ.getMenu(r.getLevel(),r.getOrder());
-			if (l.size()>0) {
 				for (Menu m : lmenu) {
-					if (m.getLevel().equals(l.get(0).getLevel()) && m.getOrder().equals(l.get(0).getOrder())) {
+					if (r.getId().equals(m.getId())) {
 						m.setUsed(true);
 					}
-				}
 			}
 			
 		}
@@ -240,6 +237,7 @@ public class MenuAction extends ActionSupport {
 			result.setMessage("请选择用户类别查询后再试");
 		}else{
 			Role role=(Role)roleBIZ.GetRole(" WHERE NAME='"+menu.getType()+"' ").get(0);
+			role.setId(menu.getId());
 			role.setLevel(menu.getLevel());
 			role.setOrder(menu.getOrder());
 			if (menu.isUsed()) {
@@ -250,7 +248,6 @@ public class MenuAction extends ActionSupport {
 				} catch (Exception e) {
 					result.setStatusCode("300");
 					result.setMessage(e.getMessage());
-					// TODO: handle exception
 				}
 			}else{
 				try {
@@ -260,7 +257,6 @@ public class MenuAction extends ActionSupport {
 				} catch (Exception e) {
 					result.setStatusCode("300");
 					result.setMessage(e.getMessage());
-					// TODO: handle exception
 				}
 				
 			}

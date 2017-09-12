@@ -94,9 +94,14 @@ public class MenuBIZImpl implements MenuBIZ {
 	
 	@Override
 	public List getMenu(String level,String order) {
-		return menuDao.getMenu(level,order);
+		return menuDao.getMenu(level,order);		
+	}
 
-		
+	
+	
+	@Override
+	public Menu getMenuById(String id) {
+		return menuDao.getMenuByID(id);
 	}
 
 	public StringBuilder getChildMenu_recursion(Menu menu){
