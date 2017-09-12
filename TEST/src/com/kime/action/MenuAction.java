@@ -132,21 +132,21 @@ public class MenuAction extends ActionSupport {
 			}
 		}
 		
-//		session.setAttribute("parentMent", lMenus); 
-//		for (Object object : lMenus) {
-//			Menu m=(Menu)object;
-//			String string=menuBIZ.getChildMenu(m.getId());
-//			session.setAttribute(m.getId(), string); 
-//		}
-		
-		
-		List lmenu=menuBIZ.getParentMenu();
-		session.setAttribute("parentMent", lmenu); 
-		for (Object object : lmenu) {
+		session.setAttribute("parentMent", lMenus); 
+		for (Object object : lMenus) {
 			Menu m=(Menu)object;
 			String string=menuBIZ.getChildMenu(m.getId());
 			session.setAttribute(m.getId(), string); 
 		}
+		
+		
+//		List lmenu=menuBIZ.getParentMenu();
+//		session.setAttribute("parentMent", lmenu); 
+//		for (Object object : lmenu) {
+//			Menu m=(Menu)object;
+//			String string=menuBIZ.getChildMenu(m.getId());
+//			session.setAttribute(m.getId(), string); 
+//		}
 		
 		return SUCCESS;
 	}
