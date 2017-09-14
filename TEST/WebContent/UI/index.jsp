@@ -208,7 +208,7 @@ function bjui_index_exchange() {
             </div>
             <nav class="collapse navbar-collapse" id="bjui-navbar-collapse">
                 <ul class="nav navbar-nav navbar-right" id="bjui-hnav-navbar">
-                    <s:iterator var="menu" value="#session['parentMent']">
+                    <s:iterator var="menu" value="#session['parentMenu']">
                     	<li>
                     	 <a href="getChildMenu.action?id=${menu.id}" data-toggle="sidenav" data-id-key="targetid">${menu.name}</a>
                     	</li>

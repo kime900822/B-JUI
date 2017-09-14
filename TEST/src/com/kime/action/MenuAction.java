@@ -126,16 +126,17 @@ public class MenuAction extends ActionSupport {
 		List<Role> lRoles=roleBIZ.GetRole(" where name='"+user.getType()+"' AND level='0' ORDER BY order ");
 		List<Menu> lMenus=new ArrayList<>();
 		for (Role r : lRoles) {
-			List<Menu> l=menuBIZ.getMenu(r.getLevel(),r.getOrder());
-			if (l.size()>0) {
-				lMenus.add(l.get(0));
+			Menu menu = menuBIZ.getMenuById(r.getId());
+			if (menu!=null) {
+				lMenus.add(menu);
 			}
 		}
 		
-		session.setAttribute("parentMent", lMenus); 
+		lRoles=roleBIZ.GetRole(" where name='"+user.getType()+"' AND level>='0' ORDER BY order ");
+		session.setAttribute("parentMenu", lMenus); 
 		for (Object object : lMenus) {
 			Menu m=(Menu)object;
-			String string=menuBIZ.getChildMenu(m.getId());
+			String string=menuBIZ.getChildMenu_R(m.getId(), lRoles);
 			session.setAttribute(m.getId(), string); 
 		}
 		

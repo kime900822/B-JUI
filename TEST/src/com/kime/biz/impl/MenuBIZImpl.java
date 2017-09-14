@@ -8,6 +8,7 @@ import java.util.Map;
 import com.kime.biz.MenuBIZ;
 import com.kime.dao.MenuDAO;
 import com.kime.model.Menu;
+import com.kime.model.Role;
 
 public class MenuBIZImpl implements MenuBIZ {
 	
@@ -45,6 +46,9 @@ public class MenuBIZImpl implements MenuBIZ {
 		return menuDao.getParentMenu();
 	}
 
+	/**
+	 * 取所有子菜单
+	 */
 	@Override
 	public String getChildMenu(String parentID) {
 		
@@ -62,9 +66,32 @@ public class MenuBIZImpl implements MenuBIZ {
 		else
 			return "";
 		
+	}
+	
+	/**
+	 * 根据用户类型取菜单
+	 */
+	@Override
+	public String getChildMenu_R(String parentID,List<Role> lRoles) {
 		
-		// TODO Auto-generated method stub
-		//return menuDao.getMenuByParentID(menu.getId());
+		StringBuilder sb=new StringBuilder();
+		List<Menu> lmenu=menuDao.getMenuByParentID(parentID);
+		if (lmenu.size()>0) {
+			sb.append("[");
+			for (Menu m : lmenu) {
+				sb.append(getChildMenu_recursion_r(m,lRoles));
+			}
+			
+			sb.deleteCharAt(sb.length()-1);
+			sb.append("]");
+			if (sb.toString().equals("]")) {
+				return "{\"name\":\"无子菜单\", \"children\":[]}";
+			}
+			return sb.toString();
+		}
+		else
+			return "";
+		
 	}
 
 	@Override
@@ -124,4 +151,40 @@ public class MenuBIZImpl implements MenuBIZ {
 		
 	}
 
+	
+	public StringBuilder getChildMenu_recursion_r(Menu menu,List<Role> lRoles){
+		StringBuilder sb=new StringBuilder();
+		if (isInRole(menu, lRoles)) {
+		List<Menu> lmenus=menuDao.getMenuByParentID(menu.getId());
+		if (lmenus.size()>0) {
+			sb.append("{\"name\":\""+menu.getName()+"\",\"children\":[");
+			for (Menu m : lmenus) {
+				sb.append(getChildMenu_recursion_r(m,lRoles));		
+			}
+			if (sb.charAt(sb.length()-1)==',') {
+				sb.deleteCharAt(sb.length()-1);
+			}		
+			sb.append("]},");
+		}else{
+				sb.append("{\"id\":\""+menu.getPageid()+"\",");
+				sb.append("\"name\":\""+menu.getName()+"\",");
+				sb.append("\"target\":\""+menu.getTarget()+"\",");
+				sb.append("\"url\":\""+menu.getUrl()+"\"},");
+
+		}
+		}
+		return sb;
+		
+	}
+	
+	public boolean isInRole(Menu menu,List<Role> lRoles){
+		for (Role role : lRoles) {
+			if (menu.getId().equals(role.getId())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 }
