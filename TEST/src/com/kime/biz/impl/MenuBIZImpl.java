@@ -85,7 +85,7 @@ public class MenuBIZImpl implements MenuBIZ {
 			sb.deleteCharAt(sb.length()-1);
 			sb.append("]");
 			if (sb.toString().equals("]")) {
-				return "{\"name\":\"无子菜单\", \"children\":[]}";
+				return "{\"name\":\"无子菜单\"}";
 			}
 			return sb.toString();
 		}

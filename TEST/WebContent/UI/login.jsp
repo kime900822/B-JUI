@@ -94,9 +94,9 @@ body {
 <script type="text/javascript">
 var COOKIE_NAME = 'sys_em_username';
 $(function() {
-/* 	if('${login_message}'!=''){
+	if('${login_message}'!=''){
 		BJUI.alertmsg('error', '${login_message}');
-	} */
+	} 
     choose_bg();
     changeCode();
     if ($.cookie(COOKIE_NAME)){

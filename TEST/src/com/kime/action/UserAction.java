@@ -282,6 +282,8 @@ public class UserAction extends ActionSupport {
 		HttpSession session=request.getSession();
 		session.setMaxInactiveInterval(30*60);
 
+		session.removeAttribute("login_message");
+		
 		String err_message = null;
 		try {
 			if ("".equals(name)&&"".equals(password)) {
