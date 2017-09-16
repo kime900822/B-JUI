@@ -84,9 +84,9 @@ public class MenuBIZImpl implements MenuBIZ {
 			
 			sb.deleteCharAt(sb.length()-1);
 			sb.append("]");
-//			if (sb.toString().equals("]")) {
-//				return "{\"name\":\"无子菜单\"}";
-//			}
+			if (sb.toString().equals("]")) {
+				return "{\"name\":\"无子菜单\"}";
+			}
 			return sb.toString();
 		}
 		else
@@ -156,27 +156,22 @@ public class MenuBIZImpl implements MenuBIZ {
 		StringBuilder sb=new StringBuilder();
 		List<Menu> lmenus=menuDao.getMenuByParentID(menu.getId());
 		if (isInRole(menu, lRoles)) {		
-		if (lmenus.size()>0) {
-			sb.append("{\"name\":\""+menu.getName()+"\",\"children\":[");
-			for (Menu m : lmenus) {
-				sb.append(getChildMenu_recursion_r(m,lRoles));		
-			}
-			if (sb.charAt(sb.length()-1)==',') {
-				sb.deleteCharAt(sb.length()-1);
-			}		
-			sb.append("]},");
-		}else{
-				sb.append("{\"id\":\""+menu.getPageid()+"\",");
-				sb.append("\"name\":\""+menu.getName()+"\",");
-				sb.append("\"target\":\""+menu.getTarget()+"\",");
-				sb.append("\"url\":\""+menu.getUrl()+"\"},");
-
-		}
-		}else{
 			if (lmenus.size()>0) {
-				sb.append("{\"name\":\"无子菜单\"},");
+				sb.append("{\"name\":\""+menu.getName()+"\",\"children\":[");
+				for (Menu m : lmenus) {
+					sb.append(getChildMenu_recursion_r(m,lRoles));		
+				}
+				if (sb.charAt(sb.length()-1)==',') {
+					sb.deleteCharAt(sb.length()-1);
+				}		
+				sb.append("]},");
+			}else{
+					sb.append("{\"id\":\""+menu.getPageid()+"\",");
+					sb.append("\"name\":\""+menu.getName()+"\",");
+					sb.append("\"target\":\""+menu.getTarget()+"\",");
+					sb.append("\"url\":\""+menu.getUrl()+"\"},");
+	
 			}
-			
 		}
 		return sb;
 		
