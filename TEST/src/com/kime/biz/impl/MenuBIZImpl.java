@@ -84,9 +84,9 @@ public class MenuBIZImpl implements MenuBIZ {
 			
 			sb.deleteCharAt(sb.length()-1);
 			sb.append("]");
-			if (sb.toString().equals("]")) {
-				return "{\"name\":\"无子菜单\"}";
-			}
+//			if (sb.toString().equals("]")) {
+//				return "{\"name\":\"无子菜单\"}";
+//			}
 			return sb.toString();
 		}
 		else
@@ -154,8 +154,8 @@ public class MenuBIZImpl implements MenuBIZ {
 	
 	public StringBuilder getChildMenu_recursion_r(Menu menu,List<Role> lRoles){
 		StringBuilder sb=new StringBuilder();
-		if (isInRole(menu, lRoles)) {
 		List<Menu> lmenus=menuDao.getMenuByParentID(menu.getId());
+		if (isInRole(menu, lRoles)) {		
 		if (lmenus.size()>0) {
 			sb.append("{\"name\":\""+menu.getName()+"\",\"children\":[");
 			for (Menu m : lmenus) {
@@ -172,6 +172,11 @@ public class MenuBIZImpl implements MenuBIZ {
 				sb.append("\"url\":\""+menu.getUrl()+"\"},");
 
 		}
+		}else{
+			if (lmenus.size()>0) {
+				sb.append("{\"name\":\"无子菜单\"},");
+			}
+			
 		}
 		return sb;
 		
