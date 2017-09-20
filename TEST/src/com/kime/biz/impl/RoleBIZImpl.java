@@ -2,12 +2,19 @@ package com.kime.biz.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.kime.biz.RoleBIZ;
 import com.kime.dao.RoleDAO;
 import com.kime.model.Role;
 
+@Service
 public class RoleBIZImpl implements RoleBIZ {
-
+	
+	@Autowired
 	RoleDAO roleDao;
 	
 	

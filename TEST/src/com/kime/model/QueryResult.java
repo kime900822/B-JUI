@@ -2,6 +2,9 @@ package com.kime.model;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class QueryResult  {
 	private boolean firstPage;
 	private boolean lastPage;

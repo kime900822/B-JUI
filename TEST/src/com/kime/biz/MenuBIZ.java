@@ -2,9 +2,12 @@ package com.kime.biz;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.kime.model.Menu;
 import com.kime.model.Role;
 
+@Service
 public interface MenuBIZ {
 	
 	

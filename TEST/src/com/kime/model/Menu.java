@@ -1,18 +1,41 @@
 package com.kime.model;
 
-public class Menu {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-	 private String id;
-	 private String parentid;
-	 private String name;
-	 private String target;
-	 private String url;
-	 private String order;
-	 private String level;
-	 private String pageid;
-	 
-	 private boolean used;
-	 private String type;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.stereotype.Component;
+
+@Component
+@Entity @Table(name = "t_menu")
+public class Menu {
+	
+	@Id
+	@GeneratedValue(generator="uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid")
+	private String id;
+	@Column
+	private String parentid;
+	@Column
+	private String name;
+	@Column
+	private String target;
+	@Column
+	private String url;
+	@Column(name="`order`")
+	private String order;
+	@Column
+	private String level;
+	@Column
+	private String pageid;
+	@Transient
+	private boolean used;
+	@Transient
+	private String type;
 	 
 	public String getType() {
 		return type;

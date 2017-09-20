@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +26,10 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kime.biz.UserBIZ;
@@ -34,6 +39,8 @@ import com.kime.model.User;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+@Controller
+@Scope("prototype")
 public class UserAction extends ActionSupport {
 
 	/**
@@ -41,11 +48,15 @@ public class UserAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Autowired
+	private UserBIZ userBIZ;
+	@Autowired
+	private User user;
+	@Autowired
+	private Result result;
+	@Autowired
+	private QueryResult qResult ;
 	
-	UserBIZ userBIZ;
-	User user;
-	Result result;
-	QueryResult qResult;
 	private InputStream reslutJson;
 	private String json;
 	

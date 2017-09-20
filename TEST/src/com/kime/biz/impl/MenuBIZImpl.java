@@ -1,20 +1,20 @@
 package com.kime.biz.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kime.biz.MenuBIZ;
 import com.kime.dao.MenuDAO;
 import com.kime.model.Menu;
 import com.kime.model.Role;
 
+@Service
 public class MenuBIZImpl implements MenuBIZ {
 	
+	@Autowired
 	MenuDAO menuDao;
-
-
 
 	public MenuDAO getMenuDao() {
 		return menuDao;

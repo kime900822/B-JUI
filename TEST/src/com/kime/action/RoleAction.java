@@ -11,11 +11,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.filters.SetCharacterEncodingFilter;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,12 +34,19 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author kime
  *
  */
-public class RoleAction extends ActionSupport {
 
-	RoleBIZ roleBIZ;
-	Role role;
-	Result result;
-	QueryResult qResult;
+@Controller
+@Scope("prototype")
+public class RoleAction extends ActionSupport {
+	
+	@Autowired
+	private RoleBIZ roleBIZ;
+	@Autowired
+	private Role role;
+	@Autowired
+	private Result result;
+	@Autowired
+	private QueryResult qResult;
 	
 	
 	private InputStream reslutJson;

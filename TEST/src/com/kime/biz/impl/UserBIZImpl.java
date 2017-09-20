@@ -2,12 +2,20 @@ package com.kime.biz.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.kime.biz.UserBIZ;
 import com.kime.dao.UserDAO;
 import com.kime.model.QueryResult;
 import com.kime.model.User;
 
+@Service
 public class UserBIZImpl implements UserBIZ {
+	
+	@Autowired
 	UserDAO userDao;
 
 	public UserDAO getUserDao() {

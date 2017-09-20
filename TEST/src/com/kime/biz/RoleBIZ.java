@@ -2,8 +2,11 @@ package com.kime.biz;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.kime.model.Role;
 
+@Service
 public interface RoleBIZ {
 	public List GetRole(String where,int pageSize,int pageCurrent);
 	

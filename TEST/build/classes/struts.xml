@@ -7,6 +7,8 @@
 <!-- START SNIPPET: xworkSample -->
 <struts>
 
+	<!-- 指定由spring负责action对象的创建 -->
+    <constant name="struts.objectFactory" value="spring" />
 	<!-- 配置web默认编码集 -->
 	<constant name="struts.custom.i18n.resources" value="UTF-8" />
 	<!-- 默认请求后缀是action，配置之后请求后缀可以是action/do -->
@@ -24,7 +26,6 @@
 	<constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
 	<!-- 设置上传文件的临时文件夹,默认使用javax.servlet.context.tempdir -->
     <constant name="struts.multipart.saveDir " value="/upload" />
-	
 	
 	
 	<package name="Struts 2" extends="struts-default,json-default">
@@ -54,49 +55,49 @@
 		
 		
 				
-		<action name="login" method="Login" class="UserAction">
+		<action name="login" method="Login" class="userAction">
 			<result name="success" type="redirect">/UI/index.jsp</result>
 			<result name="error" type="redirect">/UI/login.jsp</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>		
 		</action>
-		<action name="logout" method="Logout" class="UserAction">
+		<action name="logout" method="Logout" class="userAction">
 			<result name="success" type="redirect">/UI/login.jsp</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>	
 		</action>
 
-		<action name="register" method="Register" class="UserAction">
+		<action name="register" method="Register" class="userAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>	
 		</action>
 		
-		<action name="change" method="Change" class="UserAction">
+		<action name="change" method="Change" class="userAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>	
 		</action>
-		<action name="getAllMenu" method="getAllMenu" class="MenuAction">
+		<action name="getAllMenu" method="getAllMenu" class="menuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
-		<action name="editMenu" method="editMenu" class="MenuAction">
+		<action name="editMenu" method="editMenu" class="menuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
-		<action name="deleteMenu" method="deleteMenu" class="MenuAction">
+		<action name="deleteMenu" method="deleteMenu" class="menuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
-		<action name="getChildMenu" method="getChildMenu" class="MenuAction">
+		<action name="getChildMenu" method="getChildMenu" class="menuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
-		<action name="getFatherMenu" method="getFatherMenu" class="MenuAction">
+		<action name="getFatherMenu" method="getFatherMenu" class="menuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
@@ -147,45 +148,45 @@
             </result>
 		</action>
 		
-		<action name="getRole" method="GetRole" class="RoleAction">
+		<action name="getRole" method="GetRole" class="roleAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>	
 		
-		<action name="deleteRole" method="DeleteRole" class="RoleAction">
+		<action name="deleteRole" method="DeleteRole" class="roleAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>	
 		
-		<action name="modeRole" method="ModeRole" class="RoleAction">
+		<action name="modeRole" method="ModeRole" class="roleAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>	
 			
 		
-		<action name="getAllRole" method="GetAllRole" class="RoleAction">
+		<action name="getAllRole" method="GetAllRole" class="roleAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
 		
-		<action name="getAllRole_User" method="GetAllRole_User" class="RoleAction">
+		<action name="getAllRole_User" method="GetAllRole_User" class="roleAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
 		
 		
-		<action name="getRoleMenu" method="GetRoleMenu" class="MenuAction">
+		<action name="getRoleMenu" method="GetRoleMenu" class="menuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>
 		</action>
 		
-		<action name="editRoleMenu" method="EditRoleMenu" class="MenuAction">
+		<action name="editRoleMenu" method="EditRoleMenu" class="menuAction">
 			<result type="stream">
 				<param name="inputName">reslutJson</param>
 			</result>

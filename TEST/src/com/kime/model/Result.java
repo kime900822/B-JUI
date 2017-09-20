@@ -2,6 +2,9 @@ package com.kime.model;
 
 import java.io.Serializable;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Result implements Serializable {
 	private String statusCode;
 	private String message;

@@ -2,14 +2,29 @@ package com.kime.dao.impl;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kime.dao.UserDAO;
 import com.kime.model.User;
 
+@Repository@Transactional
 public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
+    @Autowired
+    private SessionFactory sessionFactory;  
+    @PostConstruct
+    public void setSessionFactory() {  
+        super.setSessionFactory(sessionFactory);  
+    }  
+    
 	@Override
 	public User login(String name, String passWord) {
 		List user=this.getHibernateTemplate().find("FROM User where name=? and password=? ", new String[]{name,passWord});

@@ -6,11 +6,15 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,6 +26,9 @@ import com.kime.model.Role;
 import com.kime.model.User;
 import com.opensymphony.xwork2.ActionSupport;
 
+
+@Controller
+@Scope("prototype")
 public class MenuAction extends ActionSupport {
 
 	/**
@@ -29,8 +36,11 @@ public class MenuAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Autowired
 	private MenuBIZ menuBIZ;
+	@Autowired
 	private RoleBIZ roleBIZ;
+	@Autowired
 	private Menu menu;
 
 	
@@ -43,7 +53,7 @@ public class MenuAction extends ActionSupport {
 		this.roleBIZ = roleBIZ;
 	}
 
-
+	@Autowired
 	private Result result;
 	private InputStream reslutJson;
 	private String json;

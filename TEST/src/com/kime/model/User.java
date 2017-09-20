@@ -1,25 +1,41 @@
 package com.kime.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.stereotype.Component;
+
 /**
  * 用户类
  * @author zhaozhouhao
  *
  */
 
+@Component
+@Entity
+@Table(name = "t_user")
 public class User {
-
-	private String id;
-
-	private String name;
-
-	private String password;
-
-	private int age;
-
-	private String sex;
-
-	private String type;
 	
+	@Id
+	@GeneratedValue(generator="uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid")
+	private String id;
+	@Column(length=50)
+	private String name;
+	@Column(length=50)
+	private String password;
+	@Column(length=11)
+	private int age;
+	@Column(length=10)
+	private String sex;
+	private String type;
+	@Column
 	private String date;
 
 	public String getDate() {

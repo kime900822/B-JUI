@@ -2,8 +2,12 @@ package com.kime.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.kime.model.User;
 
+@Repository@Transactional
 public interface UserDAO {
 	
 	/**

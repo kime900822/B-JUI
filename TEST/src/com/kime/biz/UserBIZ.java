@@ -2,9 +2,12 @@ package com.kime.biz;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.kime.dao.UserDAO;
 import com.kime.model.User;
 
+@Service
 public interface UserBIZ {
 	
 	/**

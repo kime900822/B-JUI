@@ -2,14 +2,29 @@ package com.kime.dao.impl;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kime.dao.MenuDAO;
 import com.kime.model.Menu;
 
+@Repository @Transactional
 public class MenuDAOImpl extends HibernateDaoSupport implements MenuDAO {
 
+    @Autowired
+    private SessionFactory sessionFactory;  
+    @PostConstruct
+    public void setSessionFactory() {  
+        super.setSessionFactory(sessionFactory);  
+    }  
+	
 	@Override
 	public void save(Menu menu) {
 		this.getHibernateTemplate().save(menu);		
