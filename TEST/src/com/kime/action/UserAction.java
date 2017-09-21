@@ -26,6 +26,10 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -41,6 +45,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
 @Scope("prototype")
+@ParentPackage("Struts 2")
 public class UserAction extends ActionSupport {
 
 	/**
@@ -287,6 +292,9 @@ public class UserAction extends ActionSupport {
 	 * 用户登录
 	 * @return
 	 */
+	@Action(value="login",
+			results={@org.apache.struts2.convention.annotation.Result(name="success",location="/UI/index.jsp"),
+			@org.apache.struts2.convention.annotation.Result(name="error",location="/UI/login.jsp")})
 	public String Login(){
 	
 		HttpServletRequest request=ServletActionContext.getRequest();
@@ -331,6 +339,10 @@ public class UserAction extends ActionSupport {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
+	@Action(value="register",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String Register() throws UnsupportedEncodingException{
 		
 		Date d1=new Date();
@@ -360,6 +372,10 @@ public class UserAction extends ActionSupport {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
+	@Action(value="change",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String Change() throws UnsupportedEncodingException{
 		ActionContext actionContext = ActionContext.getContext();  
         Map session = actionContext.getSession();  
@@ -394,6 +410,7 @@ public class UserAction extends ActionSupport {
 	 * 注销登录
 	 * @return
 	 */
+	@Action(value="logout",results={@org.apache.struts2.convention.annotation.Result(name="success",location="/UI/login.jsp")})
 	public String Logout(){
 		
 		ActionContext actionContext = ActionContext.getContext();  
@@ -408,6 +425,10 @@ public class UserAction extends ActionSupport {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
+	@Action(value="getUser",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String GetUser() throws UnsupportedEncodingException{
 		
 		String where="";
@@ -478,6 +499,10 @@ public class UserAction extends ActionSupport {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
+	@Action(value="modUser",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String ModUser() throws UnsupportedEncodingException{
 		
 		Date d1=new Date();
@@ -512,6 +537,10 @@ public class UserAction extends ActionSupport {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
+	@Action(value="deleteUser",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String DeleteUser() throws UnsupportedEncodingException{
 		List<User> luser=new Gson().fromJson(json, new TypeToken<ArrayList<User>>() {}.getType());
 		try {
@@ -535,6 +564,13 @@ public class UserAction extends ActionSupport {
      * excel导出
      * @return
      */
+	@Action(value="exportUserExcel",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson",
+					"contentType","application/vnd.ms-excel",
+					"contentDisposition","attachment;filename=%{fileName}",
+					"bufferSize","1024"
+			})})
     public String ExportUserExcel() {
         try {
             //第一步，创建一个webbook，对应一个Excel文件
@@ -668,6 +704,10 @@ public class UserAction extends ActionSupport {
      * @throws IOException 
      * @throws FileNotFoundException 
      */
+	@Action(value="importUser",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
     public String  ImportUser() throws FileNotFoundException, IOException{
         try {
 	    	if (upfile!=null) {

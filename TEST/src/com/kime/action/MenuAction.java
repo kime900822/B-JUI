@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Results;
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -29,6 +32,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
 @Scope("prototype")
+@ParentPackage("Struts 2")
 public class MenuAction extends ActionSupport {
 
 	/**
@@ -121,7 +125,10 @@ public class MenuAction extends ActionSupport {
 	
 	
 	
-
+	@Action(value="getAllMenu",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String getAllMenu() throws UnsupportedEncodingException{		
 		List lmenu = menuBIZ.getAllMenu();
 		reslutJson=new ByteArrayInputStream(new Gson().toJson(lmenu).getBytes("UTF-8"));  
@@ -129,6 +136,10 @@ public class MenuAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	@Action(value="getFatherMenu",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String getFatherMenu() throws UnsupportedEncodingException{
 		HttpServletRequest request=ServletActionContext.getRequest();
 		HttpSession session=request.getSession();
@@ -162,6 +173,10 @@ public class MenuAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	@Action(value="getChildMenu",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String getChildMenu() throws UnsupportedEncodingException{
 		
 		HttpServletRequest request=ServletActionContext.getRequest();
@@ -171,6 +186,10 @@ public class MenuAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	@Action(value="deleteMenu",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String deleteMenu() throws UnsupportedEncodingException{
 		List lmenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
 		menu=(Menu) lmenu.get(0);
@@ -186,7 +205,10 @@ public class MenuAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	
+	@Action(value="editMenu",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String editMenu() throws UnsupportedEncodingException{
 		
 		List lmenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
@@ -215,7 +237,10 @@ public class MenuAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	
+	@Action(value="getRoleMenu",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String GetRoleMenu() throws UnsupportedEncodingException{
 		
 		List<Menu> lmenu = menuBIZ.getAllMenu();
@@ -239,6 +264,10 @@ public class MenuAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	@Action(value="editRoleMenu",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String EditRoleMenu() throws UnsupportedEncodingException{
 		List lMenu=new Gson().fromJson(json, new TypeToken<ArrayList<Menu>>() {}.getType());
 		Menu menu=(Menu)lMenu.get(0);
@@ -277,6 +306,8 @@ public class MenuAction extends ActionSupport {
 		reslutJson=new ByteArrayInputStream(new Gson().toJson(result).getBytes("UTF-8")); 	
 		return SUCCESS;
 	}
+	
+	
 	
 	
 }

@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.filters.SetCharacterEncodingFilter;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -37,6 +39,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Controller
 @Scope("prototype")
+@ParentPackage("Struts 2")
 public class RoleAction extends ActionSupport {
 	
 	@Autowired
@@ -132,6 +135,10 @@ public class RoleAction extends ActionSupport {
 		this.role = role;
 	}
 	
+	@Action(value="getRole",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String GetRole() throws UnsupportedEncodingException{
 	
 		List lrole=roleBIZ.GetRole(" WHERE level='-1' ",Integer.parseInt(pageSize),Integer.parseInt(pageCurrent));
@@ -152,6 +159,10 @@ public class RoleAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	@Action(value="deleteRole",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String DeleteRole() throws UnsupportedEncodingException{
 		List<Role> lRoles=new Gson().fromJson(json, new TypeToken<ArrayList<Role>>() {}.getType());
 		try {
@@ -171,7 +182,10 @@ public class RoleAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	
+	@Action(value="modeRole",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String ModeRole() throws UnsupportedEncodingException{
 		
 		List<Role> lRoles=new Gson().fromJson(json, new TypeToken<ArrayList<Role>>() {}.getType());
@@ -210,6 +224,10 @@ public class RoleAction extends ActionSupport {
 		
 	}
 	
+	@Action(value="getAllRole",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String GetAllRole() throws UnsupportedEncodingException{
 		
 		List<Role> lRole=roleBIZ.GetRole(" WHERE level='-1' ");
@@ -218,7 +236,10 @@ public class RoleAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	
+	@Action(value="getAllRole_User",results={@org.apache.struts2.convention.annotation.Result(type="stream",
+			params={
+					"inputName", "reslutJson"
+			})})
 	public String GetAllRole_User() throws UnsupportedEncodingException{
 		
 		List<Role> lRole=roleBIZ.GetRole(" WHERE level='-1' ");
