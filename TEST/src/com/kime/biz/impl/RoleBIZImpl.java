@@ -44,8 +44,10 @@ public class RoleBIZImpl implements RoleBIZ {
 
 	@Override
 	public void Delete(Role role) {
-		roleDao.Delete(role);
-		
+		List<Role> lRoles=roleDao.Query(" WHERE NAME='"+role.getName()+"'");
+		for (Role r : lRoles) {
+			roleDao.Delete(r);
+		}
 	}
 
 	@Override

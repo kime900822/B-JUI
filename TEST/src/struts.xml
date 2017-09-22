@@ -54,7 +54,7 @@
 		<!--global-results放的位置顺序不对会报错， 全局变量error -->  
 		<global-results>  
 			<!-- LoginInterceptor中的Action.LOGIN对应找到name -->  
-			<result name="login">/logout.action</result>         
+			<result name="login" type="dispatcher">/UI/login.jsp</result>         
 		</global-results>
 		
 		

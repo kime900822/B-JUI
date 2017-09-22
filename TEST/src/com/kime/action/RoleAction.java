@@ -26,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kime.biz.RoleBIZ;
+import com.kime.biz.UserBIZ;
 import com.kime.model.QueryResult;
 import com.kime.model.Result;
 import com.kime.model.Role;
@@ -50,8 +51,17 @@ public class RoleAction extends ActionSupport {
 	private Result result;
 	@Autowired
 	private QueryResult qResult;
+	@Autowired
+	private UserBIZ userBIZ;
 	
 	
+	public UserBIZ getUserBIZ() {
+		return userBIZ;
+	}
+	public void setUserBIZ(UserBIZ userBIZ) {
+		this.userBIZ = userBIZ;
+	}
+
 	private InputStream reslutJson;
 	private String json;
 	private String pageSize;
@@ -167,10 +177,17 @@ public class RoleAction extends ActionSupport {
 		List<Role> lRoles=new Gson().fromJson(json, new TypeToken<ArrayList<Role>>() {}.getType());
 		try {
 			for (Role r : lRoles) {
-				roleBIZ.Delete(r);	
+				if (userBIZ.getUser(" WHERE TYPE='"+r.getName()+"'").size()>0) {
+					result.setMessage("存在此类别用户,不能删除！");
+					result.setStatusCode("300");
+				}else{
+					roleBIZ.Delete(r);	
+					result.setMessage("删除成功！");
+					result.setStatusCode("200");
+				}
+				
 			}
-			result.setMessage("删除成功！");
-			result.setStatusCode("200");
+			
 		} catch (Exception e) {
 			result.setMessage(e.getMessage());
 			result.setStatusCode("300");
