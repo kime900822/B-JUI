@@ -618,8 +618,7 @@ public class UserAction extends ActionSupport {
             sheet.setColumnWidth(2, 3000);
             sheet.setColumnWidth(3, 3000);
             sheet.setColumnWidth(4, 3000);
-            sheet.setColumnWidth(5, 3000);
-            sheet.setColumnWidth(6, 6000);
+            sheet.setColumnWidth(5, 6000);
             
             //第六步，写入实体数据，实际应用中这些数据从数据库得到
             

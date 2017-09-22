@@ -32,21 +32,26 @@
 	</property>
 </bean>  -->
 
-
+<!-- 数据库配置 -->
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="locations">
+		<value>/conf/jdbc.properties</value> 
+	</property>
+</bean>
 
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	<property name="driverClassName">
-		<value>com.mysql.jdbc.Driver</value>
+		<value>${jdbc.driverClassName}</value>
 	</property>
 	<property name="url">
 		<!--<value>jdbc:mysql://zzh624109553.xicp.net:32215/b_jui</value> -->
-		<value>jdbc:mysql://localhost:3306/b_jui</value>
+		<value>${jdbc.url}</value>
 	</property>
 	<property name="username">
-		<value>kime</value>
+		<value>${jdbc.username}</value>
 	</property>
 	<property name="password">
-		<value>zzh900822</value>
+		<value>${jdbc.password}</value>
 	</property>
 </bean>
 

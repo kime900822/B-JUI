@@ -26,6 +26,8 @@
 	<constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
 	<!-- 设置上传文件的临时文件夹,默认使用javax.servlet.context.tempdir -->
     <constant name="struts.multipart.saveDir " value="/upload" />
+	<!-- 进行扫描的根包，该包会被扫描成action -->
+	<constant name="struts.convention.action.packages" value="com.kime.action" />
 	
 	
 	<package name="Struts 2" extends="struts-default,json-default">
@@ -36,6 +38,8 @@
 	    <interceptors>  
 			<interceptor name="loginInterceptor"  
 				class="com.kime.intercept.LoginInterceptor">  
+				<!-- 设置忽略方法 -->
+				<param name="excludeMethods">Logout,Login</param>
 			</interceptor>  
 			<!-- 拦截器栈 -->  
 			<interceptor-stack name="mystack">  
@@ -50,147 +54,8 @@
 		<!--global-results放的位置顺序不对会报错， 全局变量error -->  
 		<global-results>  
 			<!-- LoginInterceptor中的Action.LOGIN对应找到name -->  
-			<result name="login" type="redirect">/UI/login.jsp</result>         
+			<result name="login">/logout.action</result>         
 		</global-results>
-		
-		
-				
-		<action name="login" method="Login" class="userAction">
-			<result name="success" type="redirect">/UI/index.jsp</result>
-			<result name="error" type="redirect">/UI/login.jsp</result>
-			<interceptor-ref name="defaultStack"></interceptor-ref>		
-		</action>
-		<action name="logout" method="Logout" class="userAction">
-			<result name="success" type="redirect">/UI/login.jsp</result>
-			<interceptor-ref name="defaultStack"></interceptor-ref>	
-		</action>
-
-		<action name="register" method="Register" class="userAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-			<interceptor-ref name="defaultStack"></interceptor-ref>	
-		</action>
-		
-		<action name="change" method="Change" class="userAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>	
-		</action>
-		<action name="getAllMenu" method="getAllMenu" class="menuAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>
-		<action name="editMenu" method="editMenu" class="menuAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>
-		<action name="deleteMenu" method="deleteMenu" class="menuAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>
-		<action name="getChildMenu" method="getChildMenu" class="menuAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>
-		<action name="getFatherMenu" method="getFatherMenu" class="menuAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>
-		
-		<action name="getUser" method="GetUser" class="UserAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>
-		
-		<action name="modUser" method="ModUser" class="UserAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>
-		
-		<action name="deleteUser" method="DeleteUser" class="UserAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>	
-		<action name="exportUserExcel" method="ExportUserExcel" class="UserAction">
-           <result type="stream">
-                <param name="contentType">application/vnd.ms-excel</param>
-                <param name="inputName">reslutJson</param>            
-                <param name="contentDisposition">attachment;filename=${fileName}</param>
-                <param name="bufferSize">1024</param>
-            </result>
-		</action>
-		
-		
-		<action name="importUser" method="ImportUser" class="UserAction">
-           <!-- 配置fileUpload的拦截器 -->
-<!--            <interceptor-ref name="fileUpload"> -->
-           <!-- 文件过滤 -->
-           <!-- <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param> -->
-           <!-- 允许后缀名为png,bmp,jpg,doc,xls的文件上传 -->     
-			<!-- <param name="allowedExtensions">  
-   				 xlsx,xls  
-			</param> 		
-           配置允许上传的文件大小
-           <param name="maximumSize">4000000</param>
-           </interceptor-ref>
-           <interceptor-ref name="defaultStack"></interceptor-ref>  -->
-           <result type="stream">
-                <param name="inputName">reslutJson</param>               
-            </result>
-		</action>
-		
-		<action name="getRole" method="GetRole" class="roleAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>	
-		
-		<action name="deleteRole" method="DeleteRole" class="roleAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>	
-		
-		<action name="modeRole" method="ModeRole" class="roleAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>	
-			
-		
-		<action name="getAllRole" method="GetAllRole" class="roleAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>
-		
-		<action name="getAllRole_User" method="GetAllRole_User" class="roleAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>
-		
-		
-		<action name="getRoleMenu" method="GetRoleMenu" class="menuAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>
-		
-		<action name="editRoleMenu" method="EditRoleMenu" class="menuAction">
-			<result type="stream">
-				<param name="inputName">reslutJson</param>
-			</result>
-		</action>
 		
 		
 		
