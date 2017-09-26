@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kime.biz.MenuBIZ;
 import com.kime.dao.MenuDAO;
@@ -11,6 +13,7 @@ import com.kime.model.Menu;
 import com.kime.model.Role;
 
 @Service
+@Transactional(readOnly=true)
 public class MenuBIZImpl implements MenuBIZ {
 	
 	@Autowired
@@ -27,6 +30,7 @@ public class MenuBIZImpl implements MenuBIZ {
 
 
 	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class )
 	public void editMenu(Menu menu) {
 		if (menuDao.getMenuByID(menu.getId())==null) {
 			menuDao.save(menu);
@@ -95,6 +99,7 @@ public class MenuBIZImpl implements MenuBIZ {
 	}
 
 	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRES_NEW,rollbackFor=Exception.class)
 	public void deleteMenu(Menu menu) {
 		List lm=new ArrayList<>();
 		lm.add(menu);

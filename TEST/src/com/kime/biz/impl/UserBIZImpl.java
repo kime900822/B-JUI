@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kime.biz.UserBIZ;
 import com.kime.dao.UserDAO;
@@ -13,6 +15,7 @@ import com.kime.model.QueryResult;
 import com.kime.model.User;
 
 @Service
+@Transactional(readOnly=true)
 public class UserBIZImpl implements UserBIZ {
 	
 	@Autowired
@@ -32,6 +35,7 @@ public class UserBIZImpl implements UserBIZ {
 	}
 
 	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class )
 	public void register(User user) {
 		userDao.save(user);
 	}
@@ -48,11 +52,13 @@ public class UserBIZImpl implements UserBIZ {
 	}
 
 	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class )
 	public void modUser(User user) {
 		userDao.modUser(user);
 	}
 
 	@Override
+	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class )
 	public void deleteUser(User user) {
 		userDao.deleteUser(user);
 		
