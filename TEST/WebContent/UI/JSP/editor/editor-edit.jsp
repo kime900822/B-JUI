@@ -10,7 +10,8 @@ if('${param.id}'!=null&&'${param.id}'!=''){
 	    okCallback: function(json, options) {
 	    	$.CurrentDialog.find('#j_form_id').val(json.id);
 	    	$.CurrentDialog.find('#j_form_title').val(json.title);
-	    	$.CurrentDialog.find('#j_form_content').val(json.content);
+	    	KindEditor.html("#j_form_content",json.content)
+	    	//$.CurrentDialog.find('#j_form_content').val(json.content);
 	    }
 	})		
 }
@@ -23,7 +24,7 @@ if('${param.id}'!=null&&'${param.id}'!=''){
     
 <div class="bjui-pageContent">
     <div class="bs-example" >
-        <form action="modEditor.action?callback=?" class="datagrid-edit-form" data-toggle="validate" data-data-type="jsonp">
+        <form action="saveEditor.action?callback=?" class="datagrid-edit-form" data-toggle="validate" data-data-type="jsonp">
             <div class="bjui-row col-4">
             	<input type="hidden" name="id" id="j_form_id" value="" />
                 <label class="row-label">title</label>

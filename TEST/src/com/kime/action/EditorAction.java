@@ -290,10 +290,9 @@ public class EditorAction extends ActionSupport  {
 		}
 		
 		editor.setContent(content);
-		editor.setDate(date);
+		editor.setDate(sdf.format(d1));
 		editor.setId(id);
 		editor.setTitle(title);
-		editor.setUid(sdf.format(d1));
 		editor.setUser(user);
 		editor.setUid(user.getId());
 
