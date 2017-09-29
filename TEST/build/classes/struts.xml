@@ -29,7 +29,7 @@
 	<!-- 进行扫描的根包，该包会被扫描成action -->
 	<constant name="struts.convention.action.packages" value="com.kime.action" />
 	
-	
+ 
 	<package name="Struts 2" extends="struts-default,json-default">
 		
 

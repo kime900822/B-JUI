@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kime.model.Menu;
 
 
-@Repository@Transactional
+
 public interface MenuDAO {
 
 	public void save(Menu menu);

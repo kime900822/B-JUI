@@ -17729,8 +17729,8 @@
                     minHeight                : options.minHeight || 260,
                     autoHeightMode           : options.autoHeight || false,
                     items                    : options.items || KindEditor.options.items,
-                    uploadJson               : options.uploadJson,
-                    fileManagerJson          : options.fileManagerJson,
+                    uploadJson               : options.uploadjson,
+                    fileManagerJson          : options.filemanagerjson,
                     allowFileManager         : options.allowFileManager || true,
                     //fillDescAfterUploadImage : options.fillDescAfterUploadImage || true, //上传图片成功后转到属性页，为false则直接插入图片[设为true方便自定义函数(X_afterSelect)]
                     afterUpload              : options.afterUpload,

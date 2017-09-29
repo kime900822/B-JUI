@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kime.model.Role;
 
-@Repository@Transactional
+
 public interface RoleDAO {
 	public List Query(String where);
 	

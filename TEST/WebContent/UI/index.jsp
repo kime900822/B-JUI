@@ -98,7 +98,7 @@ $(function() {
     
 /*     if('${user.name}'==''){        
         location.href = 'login.jsp'
-    }   */
+    }    */
 
 	 if('${login_message}'!=''){
 		 BJUI.alertmsg('error', '${login_message}'); 

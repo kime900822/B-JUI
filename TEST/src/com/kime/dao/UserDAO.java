@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kime.model.User;
 
-@Repository@Transactional
+
 public interface UserDAO {
 	
 	/**
