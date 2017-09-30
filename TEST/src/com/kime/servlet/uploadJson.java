@@ -92,8 +92,6 @@ public class uploadJson extends HttpServlet{
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setHeaderEncoding("UTF-8");
 		
-		MultiPartRequestWrapper wrapper = (MultiPartRequestWrapper) request;
-		
 		List items = null;
 		try {
 			items = upload.parseRequest(request);
