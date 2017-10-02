@@ -33,6 +33,8 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -709,6 +711,7 @@ public class UserAction extends ActionSupport {
 			})})
     public String  ImportUser() throws FileNotFoundException, IOException{
         try {
+        	List<User> lUsers=new ArrayList<>();
 	    	if (upfile!=null) {
 	        	POIFSFileSystem fs=new POIFSFileSystem(new FileInputStream(upfile));   
 	        	HSSFWorkbook wb = new HSSFWorkbook(fs); 
@@ -725,10 +728,13 @@ public class UserAction extends ActionSupport {
 	    				user.setSex(row.getCell(3).getStringCellValue());
 	    				user.setType(row.getCell(4).getStringCellValue());
 	    				user.setDate(row.getCell(5).getStringCellValue());
-	    				userBIZ.register(user);
+	    				lUsers.add(user);
 	            }
+	            userBIZ.inportUser(lUsers);
 	            wb.close();
 	            fs.close();
+	            result.setMessage("上传成功");
+				result.setStatusCode("200");
 			}else{
 				result.setMessage("上传失败");
 				result.setStatusCode("300");

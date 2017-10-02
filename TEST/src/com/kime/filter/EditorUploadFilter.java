@@ -23,8 +23,11 @@ public class EditorUploadFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		chain.doFilter(new StrutsRequestWrapper((HttpServletRequest) request), response);
-		
+		if (((HttpServletRequest) request).getRequestURI().equals("/TEST/uploadJson")) {
+			chain.doFilter(new StrutsRequestWrapper((HttpServletRequest) request), response);
+		}else{
+			chain.doFilter(request, response);
+		}		
 	}
 
 	@Override

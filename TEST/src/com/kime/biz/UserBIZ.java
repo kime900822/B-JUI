@@ -42,4 +42,6 @@ public interface UserBIZ {
 	public void modUser(User user);
 	
 	public void deleteUser(User user);
+	
+	public void inportUser(List lUsers);
 }

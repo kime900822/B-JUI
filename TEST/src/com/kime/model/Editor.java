@@ -28,7 +28,7 @@ public class Editor {
 	private String date;
 	@Column
 	private String uid;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name="uid",insertable=false,updatable=false)
 	private User user;
 	public String getId() {
